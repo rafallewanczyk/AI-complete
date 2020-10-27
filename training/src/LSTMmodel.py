@@ -14,12 +14,16 @@ class LSTMmodel(ModelInterface):
         super().__init__(vocab, rev_vocab)
 
         self.model = Sequential()
-        self.model.add(Embedding(len(vocab), 50, input_length=sequence_length))
+        self.model.add(Embedding(len(self.vocab), 50, input_length=sequence_length))
         self.model.add(LSTM(100, return_sequences=True))
         self.model.add(LSTM(100))
         self.model.add(Dense(100, activation='relu'))
-        self.model.add(Dense(len(self.vocab), activation='softmax'))
+        self.model.add(Dense(len(vocab), activation='softmax'))
+
         self.model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    def summary(self):
+        return self.model.summary()
 
     def save(self):
         pass
@@ -31,7 +35,7 @@ class LSTMmodel(ModelInterface):
         pass
 
     def train(self, X, y, epochs, batch_size):
-        self.model.fit(X, y, batch_size=batch_size, epochs=10)
+        self.model.fit(X, y, batch_size=batch_size, epochs=epochs)
 
     def predict(self, seed, n):
         text = []
@@ -44,6 +48,6 @@ class LSTMmodel(ModelInterface):
             encoded = pad_sequences([encoded], maxlen=len(seed), truncating='pre')
             y_predict = self.model.predict_classes(encoded)
             text.append(self.rev_vocab[y_predict[0]])
-            seed.append(self.self.v_vocab[y_predict[0]])
+            seed.append(self.rev_vocab[y_predict[0]])
             seed = seed[-len(seed) + 1:]
         return ' '.join(text)
