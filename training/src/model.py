@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class ModelInterface:
 
     def __init__(self, vocab, rev_vocab, window_size):
@@ -41,17 +44,16 @@ class ModelInterface:
         """
         raise NotImplementedError("Implement me!!")
 
-    def generate_batch(self, parsed_files, batch_size = 32):
+    def generate_batch(self, parsed_files, batch_size=32):
         filtered = []
         for name, tokens in parsed_files:
             if len(tokens) >= self.window_size:
                 filtered.append(tokens)
 
+        windows_number = sum([len(file) for file in filtered]) - len(filtered) * self.window_size
+        files_indexes = [np.random.random_integers(0, len(filtered) - 1) for i in range(batch_size)]
 
-
-
-
-
+        return self.window_size
 
     def predict(self, seed, n):
         """

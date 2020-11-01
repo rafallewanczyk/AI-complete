@@ -4,7 +4,7 @@ from collections import Counter
 from tqdm import tqdm
 
 
-def get_tokens(file_number, path):
+def parse_file(file_number, path):
     all_tokens = []
     with open(f'{path}\\{file_number}.py') as f:
         data = f.readlines()
@@ -21,7 +21,7 @@ def get_tokens(file_number, path):
 def generate_vocabs(file_indexes, path, vocab_size):
     all_tokens = []
     for i in tqdm(file_indexes):
-        name, tokens = get_tokens(i, path)
+        name, tokens = parse_file(i, path)
         all_tokens += tokens
 
     counter = Counter(tokens)
@@ -50,7 +50,7 @@ def generate_sequences(tokens, seq_length, vocab):
                 coded_seq.append(vocab['UNKNOWN'])
         sequences.append(coded_seq)
 
-    return  sequences
+    return sequences
 
 # generate_sequences(['a', 'a', 'b', 'c', 'd', 'b', 'f', 'c', 'c','q','w','e'], 5, 3)
 # get_tokens(752, 1)
