@@ -1,12 +1,13 @@
 class ModelInterface:
 
-    def __init__(self, vocab, rev_vocab):
+    def __init__(self, vocab, rev_vocab, window_size):
         """
         :param vocab: vocabulary word -> vector
         :param rev_vocab: vocabulary vector -> word
         """
         self.vocab = vocab
         self.rev_vocab = rev_vocab
+        self.window_size = window_size
 
     def save(self):
         """
@@ -39,6 +40,18 @@ class ModelInterface:
         :return: none
         """
         raise NotImplementedError("Implement me!!")
+
+    def generate_batch(self, parsed_files, batch_size = 32):
+        filtered = []
+        for name, tokens in parsed_files:
+            if len(tokens) >= self.window_size:
+                filtered.append(tokens)
+
+
+
+
+
+
 
     def predict(self, seed, n):
         """
