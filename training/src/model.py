@@ -51,7 +51,15 @@ class ModelInterface:
                 filtered.append(tokens)
 
         windows_number = sum([len(file) for file in filtered]) - len(filtered) * self.window_size
-        files_indexes = [np.random.random_integers(0, len(filtered) - 1) for i in range(batch_size)]
+
+        for i in range(0, windows_number, batch_size):
+            files_indexes = [np.random.randint(0, len(filtered)) for i in range(batch_size)]
+            start_indexes = [np.random.randint(len(filtered[idx]) - self.window_size) for idx in files_indexes]
+
+            Xs = [filtered[files_indexes][start_indexes:start_indexes + self.window_size] for files_indexes, start_indexes in zip(files_indexes, start_indexes)]
+            ys = [filtered[files_indexes][start_indexes + self.window_size] for files_indexes, start_indexes in zip(files_indexes, start_indexes)]
+
+            yield Xs, ys
 
         return self.window_size
 
