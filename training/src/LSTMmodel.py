@@ -31,10 +31,13 @@ class LSTMmodel(ModelInterface):
         pass
 
     def _train_on_batch(self, X, y):
-        pass
+        y = to_categorical(y, num_classes=len(self.vocab))
+        X = np.array(X)
 
-    def train(self, X, y, epochs, batch_size):
-        self.model.fit(X, y, batch_size=batch_size, epochs=epochs)
+        return self.model.train_on_batch(X, y)
+
+    # def train(self, X, y, epochs, batch_size):
+    #     self.model.fit(X, y, batch_size=batch_size, epochs=epochs)
 
     def predict(self, seed, n):
         text = []

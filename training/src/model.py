@@ -1,4 +1,5 @@
 import numpy as np
+from tqdm import tqdm
 
 
 class ModelInterface:
@@ -24,16 +25,29 @@ class ModelInterface:
         """
         raise NotImplementedError("Implement me!!")
 
-    def train(self, X, y, epochs, batch_size):
+    def token_to_int(self, token):
+        if token in self.vocab:
+            return self.vocab[token]
+        else:
+            return self.vocab['UNKNOWN']
+
+    def train(self, parsed_files, epochs, batch_size):
         """
         generates batches and performs training on them
-        :param X: training set
-        :param y: labels
+        :param parsed_files: training set
         :param epochs: number of epochs
         :param batch_size: size of batch required for _train_on_batch
         :return: none
         """
-        raise NotImplementedError("Implement me!!")
+
+        # convert words to integers:
+        parsed_files = [(name, [self.token_to_int(token) for token in token_list]) for name, token_list in parsed_files]
+
+        for epoch in range(epochs):
+            for X, y in tqdm(self.generate_batch(parsed_files, 32)):
+                loss, acc = self._train_on_batch(X, y)
+            print(f'loss:{loss}, acc:{acc}')
+
 
     def _train_on_batch(self, Xs, ys):
         """
@@ -56,12 +70,12 @@ class ModelInterface:
             files_indexes = [np.random.randint(0, len(filtered)) for i in range(batch_size)]
             start_indexes = [np.random.randint(len(filtered[idx]) - self.window_size) for idx in files_indexes]
 
-            Xs = [filtered[files_indexes][start_indexes:start_indexes + self.window_size] for files_indexes, start_indexes in zip(files_indexes, start_indexes)]
-            ys = [filtered[files_indexes][start_indexes + self.window_size] for files_indexes, start_indexes in zip(files_indexes, start_indexes)]
+            Xs = [filtered[files_indexes][start_indexes:start_indexes + self.window_size] for
+                  files_indexes, start_indexes in zip(files_indexes, start_indexes)]
+            ys = [filtered[files_indexes][start_indexes + self.window_size] for files_indexes, start_indexes in
+                  zip(files_indexes, start_indexes)]
 
             yield Xs, ys
-
-        return self.window_size
 
     def predict(self, seed, n):
         """

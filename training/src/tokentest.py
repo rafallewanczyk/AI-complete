@@ -14,17 +14,15 @@ def parse_file(file_number, path):
             all_tokens += [token.string for token in tokens]
         except Exception as e:
             pass
-            #todo inform about error occurence
+            # todo inform about error occurence
     return file_number, all_tokens
 
 
 def generate_vocabs(file_indexes, path, vocab_size):
-    all_tokens = []
+    counter = Counter()
     for i in tqdm(file_indexes):
         name, tokens = parse_file(i, path)
-        all_tokens += tokens
-
-    counter = Counter(tokens)
+        counter.update(tokens)
 
     vocab = {'UNKNOWN': 0}
     reversed_vocab = {0: 'UNKNOWN'}
@@ -37,7 +35,6 @@ def generate_vocabs(file_indexes, path, vocab_size):
 
 
 def generate_sequences(tokens, seq_length, vocab):
-
     seq_length += 1  # one predicted word
     sequences = []
     for i in tqdm(range(seq_length, len(tokens) + 1)):
