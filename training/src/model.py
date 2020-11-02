@@ -42,12 +42,29 @@ class ModelInterface:
 
         # convert words to integers:
         parsed_files = [(name, [self.token_to_int(token) for token in token_list]) for name, token_list in parsed_files]
+        smooth_loss = None
+        smooth_acc = None
+
+        def smooth_update(sx, x):
+            if sx is None:
+                return x
+            else:
+                return 0.99 * sx + 0.01 * x
 
         for epoch in range(epochs):
-            for X, y in tqdm(self.generate_batch(parsed_files, 32)):
-                loss, acc = self._train_on_batch(X, y)
-            print(f'loss:{loss}, acc:{acc}')
+            generator = self.generate_batch(parsed_files, 32)
+            windows_number = sum([len(tokens) for _, tokens in parsed_files]) - len(parsed_files) * self.window_size
 
+            progress = tqdm(range(0, windows_number, batch_size))
+            for i in progress:
+                X, y = next(generator)
+                loss, acc = self._train_on_batch(X, y)
+
+                smooth_loss = smooth_update(smooth_loss, loss)
+                smooth_acc = smooth_update(smooth_acc, acc)
+
+                if i % (windows_number // 1000) == 0:
+                    progress.set_postfix_str(f'loss:{smooth_loss}, acc:{smooth_acc}')
 
     def _train_on_batch(self, Xs, ys):
         """
