@@ -1,0 +1,12 @@
+backend/__pycache__
+venv/
+.idea/ 
+training/data/__pycache__
+training/src/__pycache__
+*/__pycache__
+data/
+results/
+checkpoints/
+*.tok
+*.voc
+
