@@ -3,7 +3,7 @@ import time
 
 import tensorflow as tf
 from tensorflow.keras.layers import Embedding, Dense
-from tensorflow.keras.layers import GRU
+from tensorflow.keras.layers import GRU, LSTM
 from tensorflow.keras.models import Sequential
 from tensorflow.python.keras.layers import Convolution1D
 
@@ -21,14 +21,13 @@ class Model:
         self.win_size = win_size
         self.optimizer = tf.keras.optimizers.Adam()
         self.checkpoint_name = checkpoint_name
-        self.losses = []
 
     def build_model(self):
         self.model = Sequential()
         self.model.add(Embedding(self.vocab_size, self.embedding_dim, batch_input_shape=[self.batch_size, None]))
         self.model.add(Convolution1D(self.embedding_dim, kernel_size=1, activation='relu'))
         self.model.add(
-            GRU(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+            LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         # self.model.add(
         #     GRU(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         self.model.add(Dense(self.vocab_size))
@@ -55,7 +54,9 @@ class Model:
             for (batch_n, (x, y)) in enumerate(self.dataset.next_batch(tokenized_files, self.batch_size)):
                 loss = self.train_step(x, y)
                 if batch_n % 500 == 0:
-                    self.losses.append(loss)
+                    with open('.\\checkpoints\\losses.txt', 'a') as f:
+                            f.write(loss.numpy().__str__())
+                            f.write('\n')
                     print(f'Epoch {epoch} Batch {batch_n} Loss {loss} in {"%2f" %(time.time()-batch_start)}')
                     batch_start = time.time()
 
@@ -82,7 +83,7 @@ class Model:
     def get_prediction(self, seed_string, number=1):
         input_tokens = self.dataset.token2id(utils.tokenize_string(seed_string))
         if len(input_tokens) == 0:
-            return ''
+            return ['<UNK>']
         input_tokens = tf.expand_dims(input_tokens, 0)
 
         predictions = []
