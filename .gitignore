@@ -1,12 +1,13 @@
 backend/__pycache__
 venv/
-.idea/ 
 training/data/__pycache__
 training/src/__pycache__
 */__pycache__
-data/
-results/
-checkpoints/
+data/data/
+data/python50k_eval.txt
+data/python100k_train.txt
+data/README.md
+results/*
 *.tok
 *.voc
 

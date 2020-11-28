@@ -43,6 +43,7 @@ class Model:
 
         self.dataset = Dataset(vocab, self.win_size)
         self.build_model()
+        print(self.model.summary())
         self.compile('training')
 
         for epoch in range(epochs):
