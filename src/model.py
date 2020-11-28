@@ -63,7 +63,6 @@ class Model:
 
                 if batch_n % 1000 == 0:
                     self.save(self.checkpoint_name)
-                    print(f'saving model with loss {loss}')
 
             print(f'Epoch {epoch + 1} Loss {loss}')
             print(f'Time taken for 1 epoch {time.time() - start}')

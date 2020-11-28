@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generate_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/generate_data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prediction_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/prediction_driver.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/training_driver.ipynb" afterDir="false" />
-    </list>
+    <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +44,7 @@
       <workItem from="1606407133092" duration="677000" />
       <workItem from="1606408235456" duration="7417000" />
       <workItem from="1606505665916" duration="305000" />
-      <workItem from="1606509939957" duration="6768000" />
+      <workItem from="1606509939957" duration="7189000" />
     </task>
     <servers />
   </component>
