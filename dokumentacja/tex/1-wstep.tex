@@ -64,7 +64,7 @@ istnieje więcej przypadków użycia:
 	specjalnych (z czym jak pokażę później radzi sobie bardzo dobrze), jak i długich, niewygodnych do napisania na małej dotykowej klawiaturze nazw.
 
 	\item Szukanie błędów w kodzie. Model może obliczyć prawdopodobieństwo wystąpienie następnego tokenu po czym sprawdzić czy 
-	pokrywa się on z faktycznie występującym tokenem. W ten sposób możemy określić gdzie miejsce w kodzie w którym możemy się 
+	pokrywa się on z faktycznie występującym tokenem. W ten sposób możemy określić miejsce w kodzie w którym możemy się 
 	spodziewać, że został popełniony błąd. 
 
 	\item Kompresja kodu. Modele Sequence2Sequence sprawdzają się w zadaniu kompresji. Model mógłby nauczyć się wygenerować resztę programu 
@@ -72,19 +72,30 @@ istnieje więcej przypadków użycia:
 	krótkie sekwencje. 
 \end{itemize}
 
+\subsection {Pytania badawcze}
+Czy rekurencyjne sieci neuronowe nadają się do wykonywania predykcji w kodzie?
+\subsubsection {Inne pytania}
+\begin{itemize}
+	\item Jaki model radzi sobie najlepiej z wykonywaniem predykcji w kodzie? 
+	\item Jaki jest wpływ długości sekwencji na predykcje? 
+	\item Czy wielkość słownika ma wpływ na predykcje? 
+	\item Jaka liczba warstw rekurencyjnej sieci neuronowej radzi sobie najlepiej? 
+	\item Jaki układ warstw poradzi sobie najlepiej w zadaniu. 
+\end{itemize} 
 
-\begin{figure}[!h]
-	% Znacznik \caption oprócz podpisu służy również do wygenerowania numeru obrazka;
-	\caption{Tradycyjne godło Politechniki Warszawskiej}
-	% dlatego zawsze pamiętaj używać najpierw \caption, a potem \label
-    \label{fig:tradycyjne-logo-pw}
-    % Zamiast width można też użyć height, etc. 
-    \centering \includegraphics[width=0.5\linewidth]{logopw.png}
-\end{figure}
 
-\begin{figure}[!h]
-	\caption{Współczesne logo Politechniki Warszawskiej}
-	\label{fig:nowe-logo-pw}
-	\centering \includegraphics[width=0.5\linewidth]{logopw2.png}
-\end{figure}
-% \lipsum[4-6] Reference to image \ref{fig:nowe-logo-pw}. 
+% \begin{figure}[!h]
+% 	% Znacznik \caption oprócz podpisu służy również do wygenerowania numeru obrazka;
+% 	\caption{Tradycyjne godło Politechniki Warszawskiej}
+% 	% dlatego zawsze pamiętaj używać najpierw \caption, a potem \label
+%     \label{fig:tradycyjne-logo-pw}
+%     % Zamiast width można też użyć height, etc. 
+%     \centering \includegraphics[width=0.5\linewidth]{logopw.png}
+% \end{figure}
+
+% \begin{figure}[!h]
+% 	\caption{Współczesne logo Politechniki Warszawskiej}
+% 	\label{fig:nowe-logo-pw}
+% 	\centering \includegraphics[width=0.5\linewidth]{logopw2.png}
+% \end{figure}
+% % \lipsum[4-6] Reference to image \ref{fig:nowe-logo-pw}. 
