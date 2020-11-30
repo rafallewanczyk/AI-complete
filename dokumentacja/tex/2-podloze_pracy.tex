@@ -1,0 +1,65 @@
+\newpage % Rozdziały zaczynamy od nowej strony.
+\section{Podłoże pracy}
+W ciągu ostatnich kilku lat przetwarzanie języka naturalnego bardzo się rozwinęło. Wraz z kolejnymi 
+badaniami udało się uzyskać coraz lepsze rezultaty. Jednak dział badający zachowanie tych modeli 
+na językach programowania jest nowy, co możemy zaobserwować po zbiorze prac \cite{ml4code}
+z nim związanych. Jest w nim dużo miejsca na nowe podejścia oraz badania. W tym rozdziale omówię 
+opiszę prace istotne lub podobne do mojej.  
+
+
+\subsection{Sieci neuronowe w przewidywaniu języków programowania}
+Subhasis Das, Chinmayee Shah \cite{contextual_code_completion} porównują ze sobą modele
+\begin{itemize}
+    \item model z wagami o stałej długości okna (fixed window weight model)
+    \item model macierzy wektorów (matrix vector model)
+    \item sieć neuronowa z wyprzedzeniem (feed-forward neural network)
+    \item model z wyprzedzeniem oraz miękka uwagą (feed-forward model with soft attention)
+    \item model rekurencyjny z warstwą GRU
+\end{itemize}
+Kod wejściowy jest poddany tokenizacji przy pomocy wyrażeń regularnych oraz oceniane na podstawie dokładnego 
+dopasowania pierwszego przewidzianego tokenu oraz na podstawie 3 najlepszych sugestii. Do testów 
+używane są kody bibliotek Django, Twisted oraz jądra systemu Linux. Połowa plików źródłowych jednego z 
+projektów używana jest jako zbiór treningowy natomiast druga połowa jako zbiór walidacyjny. Wszystkie modele
+osiągają dokładność przewidzeń równą około 80\% dla 3 najlepszych sugestii, najlepiej radzi sobie model miękka uwagą
+z dokładnością 83.6\%. Problem słów poza słownikiem rozwiązany jest przy pomocy słownika przypisującego 
+token o nieznanej wartości do słowa które wpisał użytkownik. Moja praca różni się tym, że skupiam się 
+wyłącznie na sieciach rekurencyjnych, jako że w powyższej warstwa LSTM nie została uwzględniona. Próbuję 
+również uogólnić przewidywany kod poprzez trening na projektach zawierających różne biblioteki aby sprawić
+by wtyczka była użyteczna w praktyce. \\
+
+Hellendoorn i Devanbu przeprowadzili eksperyment polegający na wykonaniu 15000 predykcji dla 
+środowiska Visual Studio.Jako zbioru danych używają 14000 plików źródłowych w języku Java. 
+W swojej pracy porównują skuteczność modelu n-gram z modelami rekurencyjnymi. 
+Prezentują również dynamicznie aktualizowane modele n-gram działające w zagnieżdżonym zasięgu, rozwiązując 
+w ten sposób problem skończonego słownika oraz znacznie usprawniając sugestie. Rezultaty tej pracy 
+pokazują, że pomimo znacznie lepszych wyników sieci rekurencyjnych w zadaniu modelowania języka 
+naturalnego, modele n-gram w niektórych przypadkach radzą sobie lepiej z przewidywaniem kodu. Jednym
+z przytoczonych przykładów są metody wbudowane w język, dla których głębokie sieci działają lepiej, 
+jednak przegrywają przy często występujących, zróżnicowanych,  mało popularnych bibliotekach zewnętrznych, 
+w których model n-gram naturalnie radzi sobie lepiej, jednak przegrywa pod innymi względami. Swoje 
+eksperymenty przeprowadzają dla stałych wartości hiperparametrów, w swojej pracy chcę również
+zająć się strojeniem wybranych modeli. 
+
+
+\subsection {Modele statystyczne w przewidywaniu języków programowania}
+Myroslava Romaniuk \cite{pharo} pokazuje, że same modele statystyczne w tym przypadku n-gram, dokładnie 
+unigram oraz bigram radzą sobie 
+z automatycznym uzupełnianiem kodu. W swojej pracy usprawnia działanie wtyczki do środowiska programistycznego 
+Pharo. Zaproponowany model trenuje na 50 projektach w tym języku osiągając dokładność około 40\%. 
+W swojej pracy łącze modele rekurencyjne właśnie z połączonymi modelami unigram oraz bigram.
+
+\subsection {Rozwiązania komercyjne}
+W dużej mierze do powstania tej pracy przyczyniły się istniejące już rozwiązania komercyjne. Niestety 
+ze względów licencyjnych nie są ujawnione dokładnie mechanizmy stojące za ich działaniem, metody użyte 
+do treningu oraz dokładna skuteczność, przez co są słabym punktem odniesienia w porównywaniu odniesionych 
+wyników. \\
+
+Tabnine \cite{tabnine} jest wtyczką do najpopularniejszych środowisk programistycznych realizującą predykcję kolejnego tokenu w 
+większości stosowanych języków programowania. Do jej treningu zostało wykorzystane 2 miliony projektów ze strony github \cite{github}. 
+Wtyczka opiera się na GPT-2, które używa architektury transformerów. W jej skład wchodzą również zaimplementowane przez twórców
+reguły dotyczące języka. Podejście to jest bardzo nowatorskie przez wykorzystanie jeszcze nie zbadanych dokładnie modeli oraz 
+różni się od przedstawionego w tej pracy.\\
+
+Open AI realizuje generowanie kodu na podstawie opisu jego działania w komentarzu. Jest to połączenie zadania zrozumienia 
+języka naturalnego przez maszynę z zadaniem klasyfikacji. Słownik zamiast składać sie z pojedyńczych tokenów skłąda sie z całych funkcji 
+a na wejściu modelu otrzymujemy sekwencje słów zamiast poprzedzający kod. 
