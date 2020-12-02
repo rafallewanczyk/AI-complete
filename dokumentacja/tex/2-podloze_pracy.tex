@@ -38,8 +38,15 @@ z przytoczonych przykładów są metody wbudowane w język, dla których głębo
 jednak przegrywają przy często występujących, zróżnicowanych,  mało popularnych bibliotekach zewnętrznych, 
 w których model n-gram naturalnie radzi sobie lepiej, jednak przegrywa pod innymi względami. Swoje 
 eksperymenty przeprowadzają dla stałych wartości hiperparametrów, w swojej pracy chcę również
-zająć się strojeniem wybranych modeli. 
+zająć się strojeniem wybranych modeli. \\
 
+Pythia \cite{pythia} stworzona przez zespół programistów Microsoftu, w którego skład wchodzą Alexey Svyatkovskiy, Shengyu Fu, Ying Zhao, Neel Sundaresan
+jest rozszerzeniem do wtyczki IntelliSense w środowisku Visual Studio Code. W swojej pracy testują zastosowanie najwydajniejszych 
+na ten moment modeli sieci rekurencyjnych. Jako zbiór treningowy użyte jest 2700 projektów z serwisu github \cite{github}
+które wcześniej zostały poddane rozbiorowi na drzewa składniowe. Model osiąga najlepszą dotychczasową skuteczność wynoszącą
+92\% dla najlepszych 5 sugestii oraz bardzo dobry czas odpowiedzi w okolicach 100 ms. Eksperymentu tego nie będę w stanie 
+dokładnie odtworzyć ze względu na inny przygotowanie danych treningowych oraz przez inny zbiór danych (zbiór wykorzystany przez
+Pythie nie został udostępniony). Mimo to planuję zaimplementować oraz ocenić wyróżnioną architekturę w moim eksperymencie. 
 
 \subsection {Modele statystyczne w przewidywaniu języków programowania}
 Myroslava Romaniuk \cite{pharo} pokazuje, że same modele statystyczne w tym przypadku n-gram, dokładnie 
@@ -51,8 +58,8 @@ W swojej pracy łącze modele rekurencyjne właśnie z połączonymi modelami un
 \subsection {Rozwiązania komercyjne}
 W dużej mierze do powstania tej pracy przyczyniły się istniejące już rozwiązania komercyjne. Niestety 
 ze względów licencyjnych nie są ujawnione dokładnie mechanizmy stojące za ich działaniem, metody użyte 
-do treningu oraz dokładna skuteczność, przez co są słabym punktem odniesienia w porównywaniu odniesionych 
-wyników. \\
+do treningu oraz dokładna skuteczność, przez co niemożliwe jest porównanie uzyskanych przeze mnie wyników 
+z tymi podejściami. \\
 
 Tabnine \cite{tabnine} jest wtyczką do najpopularniejszych środowisk programistycznych realizującą predykcję kolejnego tokenu w 
 większości stosowanych języków programowania. Do jej treningu zostało wykorzystane 2 miliony projektów ze strony github \cite{github}. 
@@ -63,3 +70,9 @@ różni się od przedstawionego w tej pracy.\\
 Open AI realizuje generowanie kodu na podstawie opisu jego działania w komentarzu. Jest to połączenie zadania zrozumienia 
 języka naturalnego przez maszynę z zadaniem klasyfikacji. Słownik zamiast składać sie z pojedyńczych tokenów skłąda sie z całych funkcji 
 a na wejściu modelu otrzymujemy sekwencje słów zamiast poprzedzający kod. 
+
+\subsection {Rodzaje sieci}
+test test test 
+
+test test 
+
