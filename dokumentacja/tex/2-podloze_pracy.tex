@@ -74,15 +74,40 @@ a na wejściu modelu otrzymujemy sekwencje słów zamiast poprzedzający kod.
 \subsection {Rodzaje sieci}
 \#TODO - wstawić obrazek pokazujący rnn
 W swojej pracy skupiam się na sieciach rekurencyjnych sieciach neuronowych (RNN). Sieci te charakteryzują się wykorzystywaniem informacji 
-sekwencyjnych, w odróżnieniu do tradycyjnej sieci, w której zakładamy, że wszystkie wejścia i wyjścia są niezależne od siebie. Wykorzystuje 
-trzy rodzaje sieci w różnych konfiguracjach: 
+sekwencyjnych, w odróżnieniu do tradycyjnej sieci, w której zakładamy, że wszystkie wejścia i wyjścia są niezależne od siebie. Wykorzystuję
+trzy rodzaje warstw sieci w różnych konfiguracjach: 
 \begin{itemize}
     \item LSTM (Long Short-Term Memory)
     \item GRU (Gated Recurrent Unit)
-    \item CNN - splotowa sieć neuronowa (Convolutioal Neural Network)
+    \item CNN - splotowa sieć neuronowa (Convolutional Neural Network)
 \end{itemize}
+\begin{figure}[!h]
+	% Znacznik \caption oprócz podpisu służy również do wygenerowania numeru obrazka;
+	\caption{Działanie sieci neuronowej}
+	% dlatego zawsze pamiętaj używać najpierw \caption, a potem \label
+    \label{fig:rnn}
+    % Zamiast width można też użyć height, etc. 
+    \centering \includegraphics[width=28mm, height=54mm]{rnn.png}
+\end{figure}
 Architektura LSTM jest w tym momencie najpopularniejszą w zadaniach generowania sekwencji oraz predykcji szeregów czasowych. Komórka LSTM 
 wyposażona jest w trzy bramki 'wejścia',  'zapomnienia', 'wyjścia'. Bramki te kontrolują które informacje zostaną zapamiętane, zapomniane
-oraz przewidziane na podstawie wytrenowanych parametrów. 
+oraz przewidziane na podstawie wytrenowanych parametrów. Komórka GRU posiada dwie bramki 'wejścia' oraz 'zapomnij'. Podobnie to sieci LSTM 
+decydują one o tym które informacje mają zostać zachowane, a które zapomniane. CNN to sieć z wyprzedzeniem stosująca operacje splotowe na wejściowych 
+wektorach. 
+
+\subsection {Wykorzystany zbiór danych}
+W celach treningowych wykorzystałem zbiór danych zebranych przez grupę SRILAB \cite{dataset} w celu stworzenia narzędzia 
+DeepSyn. Zbiór składa się ze 150 tysięcy plików źródłowych w języku Python, pobranych z serwisu GitHub \cite{github}, po 
+usunięciu powtarzających się plików, usunięciu kopii już istniejących repozytoriów oraz zachowaniu tylko programów, z których
+można wygenerować poprawne drzewo rozkładu mające co najmniej 30 tysięcy węzłów. Wszystkie projekty wchodzące w skład 
+zbioru są wydane na licencjach pozwalających na kopiowanie oraz rozpowszechnianie takich jak MIT, BSD lub Apache. Zbiór jest 
+podzielony na 100 tysięcy plików treningowych oraz 50 tysięcy plików walidacyjnych. W swoich eksperymentach użyłem podzbioru 
+dostarczonych danych wynoszącego około 1\% oryginalnego zbioru. Decyzja ta wynika z dwóch powodów. Jak wspomniał w swojej 
+pracy Hellendoorn i Devanbu\cite{hellendoorn} modele uczenia głębokiego nie skalują dobrze przy dużych danych. Trening na 
+pełnym zbiorze byłby niemożliwy ze względu na ograniczenia czasowe. Dla przykładu trening małego modelu LSTM o 512 komórkach 
+oraz warstwą zanurzenia (Embedding) na 10 tysiącach plików zabiera około 1.5 godziny dla jednej epoki, na karcie graficznej GeForce RTX 2060. 
+Przy założeniu, że czas ten będzie rosnąć proporcjonalnie do rozmiaru danych treningowych na wykonanie jedna epoka zajmie 
+około 15 godzin, a całkowity trening, za który przyjąłem 25 epok, około dwóch tygodni. Drugim jest to, że pracę naukowe, z 
+którymi chcę porównać swoje wyniki również używają zbiorów o podobnych rozmiarach. 
 
 

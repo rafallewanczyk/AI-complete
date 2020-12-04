@@ -1,0 +1,62 @@
+\newpage % Rozdziały zaczynamy od nowej strony.
+\section{Użyte metody}
+W tym rozdziale opiszę użyte przez siebie metody prowadzące, od zbioru kodów źródłowych programów, do działającej wtyczki 
+przewidującej kolejny token w programie. Omówię również hipotezy zerowe oraz alternatywne dla pytań postawionych w wstępnym rozdziale.\\\\\\ 
+
+\subsection{Modelowanie tokenów}
+Jak pokazuje w swojej publikacji Hao Peng wraz z zespołem \cite{character-level} mimo tego, że modele budujące kolejne słowa poprzez 
+przewidywanie pojedyńczego znaku (character-level model) radzą sobie dobrze z modelowaniem języka naturalnego oraz rozwiązują problem rozmiaru słownika, 
+działają znacznie gorzej z językami programowania. Wniosek ten również potwierdza w swojej pracy Erik van Scharrenburg \cite{erik} porównując model przewidujący 
+znaki z modelem przewidującym tokeny. Z tego powodu w swojej pracy realizuję tylko modele oparte na tokenach (token-level model). 
+
+Pierwszym krokiem jest zbudowania słownika tokenów, które mogą pojawić się w kodzie. Buduję go poprzez przetworzenie wszystkich kodów źródłowych obu zbiorów treningowego oraz 
+walidacyjnego modułem tokenize \cite{tokenize} wbudowanym w język Python. Moduł ten przyjmuje na wejściu kod źródłowy programu następnie zwraca listę kolejnych tokenów (nazw zmiennych, 
+znaków specjalnych, słów kluczowych). Upewnia się on również czy kod jest poprawnie napisany np. czy wszystkie nawiasy lub apostrofy zostały zamknięte. Niepoprawne programy pomijam. 
+Znaki nowej lini również traktuję jako token, jednak nie uwzględniam wcięć w kodzie ze względu na to, że większość środowisk programistycznych stawia je 
+automatycznie. Na przykład z kodu źródłowego: 
+\begin{addmargin}[10mm]{0mm}
+    \begin{lstlisting}[
+        language=Python,
+        numbers=left,
+        firstnumber=1,
+        caption={Przykładowy program Python},
+        aboveskip=10pt
+    ]
+    for x in range(2, 10): 
+        print("hello world")
+    \end{lstlisting}
+    \end{addmargin}
+otrzymamy listę [for, x, in, range, (, 2, 10, ), :, \textbackslash n, print, (, "hello world", )].
+Następnie sortuje wszystkie wygenerowane tokeny według częstości występowania oraz wybieram top-n tokenów jako słownik i każdemu z nich przypisuję unikalną liczbę naturalną. 
+Utworzony w ten sposób słownik nie jest kompletny ponieważ nie obejmuje on wszystkich możliwych nazw występujących w kodzie. Takiego rodzaju tokeny
+zostają zastąpione sztucznym tokenem '<UNKNOWN>'. W głównej mierze są to unikalne nazwy zmiennych oraz stringi. Zastępowanie tokenu '<UNKNOWN>' prawdziwym prawdziwym tokenem omówię w 
+poświęconym temu rozdziale. 
+
+\subsection{Trening}
+Zadanie polega na przewidzeniu kolejnego tokenu na podstawie zadanej sekwencji tokenów. Długość sekwencji jest stała oraz wyrażona poprzez wielkość okna będącą jednym z badanych hiperparametrów. 
+Dla każdego z tokenów model wyszukuje jego wektor zanurzenia, wykonuje jeden krok w sieci rekurencyjnej po czym stosuje warstwę klasyfikującą 
+(Dense layer) w celu wygenerowania logitów wyrażających logistyczne-prawdopodobieństwo kolejnego tokenu. Zatem dla zadanego okna tokenów długości \begin{math}W\end{math}:
+\begin{math}[t_1, t_2, ... t_W]\end{math} obliczam wynik dla każdego możliwego wyjścia \begin{math}j, s_j\end{math} jako funkcję z wektorów tokenów \begin{math}v_{t_i}\end{math}
+z tokenów z okna.
+\\
+\centerline{\begin{math}[g_1, g_2, ..., g_W] = RNN([v_{t_1}, v_{t_2}, ..., v_{t_W}])\end{math}}\\
+\centerline{\begin{math}s_j=p_{j}^{T}[g]\end{math}} \\\\
+Minimalizowana funkcja strat jest entropią krzyżową pomiędzy prawdopodobieństwami \begin{math}softmax\end{math} dla każdego możliwego wyjścia 
+a wykonaną predykcją.Funkcja wyrażoną wzorem: \\\\
+\centerline{\begin{math}L = log(\frac{e^{s_{t_o}}}{\sum_{j}e^{s_{t_j}}})\end{math}}\\\\
+gdzie \begin{math}t_o\end{math} jest zaobserwowanym tokenem wyjściowym a \begin{math}g_i\end{math} wyjściem \begin{math}i^{th}\end{math} komórki
+którejś z badanych sieci rekurencyjnych. 
+
+Wagi sieci aktualizowane są po przetworzeniu porcji danych (mini-batch) której rozmiar jest stały. Przy treningach sieci rekurencyjnych rozmiar
+ten jest jedną z wartości kluczowych dla dobrej wydajności sieci. W moich eksperymentach wynosi on 128. Jest to kompromis pomiędzy rozsądnym 
+czasem treningu oraz jakością wyjściowych sugestii. Jest to również najczęściej wybierana wartość w przytoczonych przeze mnie publikacjach.
+
+Każda testowana sieć trenowana jest przez 25 epoki. Wartość tą wybrałem na podstawie własnych eksperymentów wstępnych, z których wynika, że 
+powyżej tej liczby model nie osiągał już lepszych rezultatów. Zbyt długi trening może również doprowadzić to przetrenowania modelu czego 
+należy unikać. 
+
+W treningu używam optymalizatora \begin{math}Adam\end{math} o domyślnych parametrach dla każdego z modeli.
+Wybór ten wynika z tego, że zależy mi na badaniu różnic wynikających z badanej architektury oraz odpowiednie strojenie optymalizatora typu SGD
+było by bardzo czasochłonne oraz bardzo komplikowałoby porównywanie ze sobą testowanych modeli. Jest to również optymalizator używany w pracach 
+do z którymi porównam uzyskane przeze mnie wyniki.  
+
