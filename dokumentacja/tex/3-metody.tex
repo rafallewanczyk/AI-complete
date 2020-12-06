@@ -1,13 +1,65 @@
 \newpage % Rozdziały zaczynamy od nowej strony.
+ 
+
 \section{Użyte metody}
 W tym rozdziale opiszę użyte przez siebie metody prowadzące, od zbioru kodów źródłowych programów, do działającej wtyczki 
 przewidującej kolejny token w programie. Omówię również hipotezy zerowe oraz alternatywne dla pytań postawionych w wstępnym rozdziale.\\\\\\ 
 
+\subsection{Badane modele}
+Rekurencyjne sieci neuronowe należą do rodziny sieci służących do przetwarzania sekwencji danych o określonej długości. Jak pokazali w swojej publikacji 
+Shewalkar, Nyavanandi i Ludwig \cite{lstmvsgru}, sieć LSTM osiąga znacznie lepsze wyniki od podstawowej sieci rekurencyjnej RNN oraz minimalnie lepsze wyniki 
+od sieci GRU, kosztem dłuższego czasu treningu. Z tego względu w swoich badaniach skupiam się głównie na warstwie LSTM oraz w mniejszej mierze na warstwie GRU, 
+która również wyprzedza podstawową sieć RNN pod względem skuteczności. 
+
+Wszystkie eksperymenty badające wpływ hiperparametrów wymienionych w wstępnym rozdziale \ref{questions} przeprowadzę na sieci LSTM, oraz najlepszą ich kombinację 
+zbadam przy wykorzystaniu warstwy GRU w celu porównania ich skuteczności w zadaniu przewidywaniu kodu. Na koniec zbadam również zachowanie wyznaczonego modelu 
+dla różnych rozmiarów słownika. 
+
+Jak pokazał w swojej pracy Yoon Kim \cite{kim} połączenie warstwy rekurencyjnej z warstwą zanurzeń poprzez warstwę splotową może mieć pozytywny wpływ na skuteczność 
+modelu. Jednak badanie to wykonywał jedynie w zadaniu modelowania języka naturalnego oraz dla modeli opartych na pojedyńczych znakach. Jednym z wykonanych przeze mnie 
+eksperymentów będzie zastosowanie tej techniki w moim zadaniu, oraz oceny skuteczności tego podejścia dla modeli opartych na tokenach. \\\\\\
+
+\begin{figure}[!h]
+	% Znacznik \caption oprócz podpisu służy również do wygenerowania numeru obrazka;
+	\caption{Ogólny badany model. Opcjonalne warstwy zaznaczone linią przerywaną}
+	% dlatego zawsze pamiętaj używać najpierw \caption, a potem \label
+    \label{fig:architektura}
+    % Zamiast width można też użyć height, etc. 
+    \centering \includegraphics[width=160mm, height=25mm]{architektura.png}
+\end{figure}
+
+
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{\begin{tabular}{ccccc}
+            \hline
+            \multicolumn{1}{|c|}{Długość sekwencji}   & \multicolumn{1}{c|}{Warstwa CNN}          & \multicolumn{1}{c|}{Liczba warstw LSTM} & \multicolumn{1}{c|}{Liczba neuronów w warstwie} & \multicolumn{1}{c|}{Liczba wszystkich parametrów} \\ \hline
+            \multicolumn{1}{|c|}{1}                   & \multicolumn{1}{c|}{nie}                  & \multicolumn{1}{c|}{1}                  & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{c|}{todo}                         \\ \hline
+            \multicolumn{1}{|c|}{\multirow{5}{*}{5}}  & \multicolumn{1}{c|}{\multirow{4}{*}{nie}} & \multicolumn{1}{c|}{\multirow{3}{*}{1}} & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{4-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{256}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{4-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{3-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{2}                  & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{2-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{tak}                  & \multicolumn{1}{c|}{1}                  & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{c|}{todo}                         \\ \hline
+            \multicolumn{1}{|c|}{\multirow{5}{*}{10}} & \multicolumn{1}{c|}{\multirow{4}{*}{nie}} & \multicolumn{1}{c|}{\multirow{2}{*}{1}} & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{4-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{3-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{2}                  & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{3-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{2}                  & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{2-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{tak}                  & \multicolumn{1}{c|}{1}                  & \multicolumn{1}{c|}{126}                        & \multicolumn{1}{c|}{todo}                         \\ \hline
+            \multicolumn{1}{|c|}{\multirow{2}{*}{15}} & \multicolumn{1}{c|}{\multirow{2}{*}{nie}} & \multicolumn{1}{c|}{\multirow{2}{*}{1}} & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{4-5} 
+            \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{c|}{todo}                         \\ \hline
+                                                      &                                           &                                         &                                                 &                                                  
+            \end{tabular}}
+    \caption{Zestawienie wykonywanych eksperymentów} 
+    \end{table} 
+
+\subsection{Hipotezy}
+todo
+    
 \subsection{Modelowanie tokenów}
 Jak pokazuje w swojej publikacji Hao Peng wraz z zespołem \cite{character-level} mimo tego, że modele budujące kolejne słowa poprzez 
 przewidywanie pojedyńczego znaku (character-level model) radzą sobie dobrze z modelowaniem języka naturalnego oraz rozwiązują problem rozmiaru słownika, 
 działają znacznie gorzej z językami programowania. Wniosek ten również potwierdza w swojej pracy Erik van Scharrenburg \cite{erik} porównując model przewidujący 
-znaki z modelem przewidującym tokeny. Z tego powodu w swojej pracy realizuję tylko modele oparte na tokenach (token-level model). 
+znaki z modelem przewidującym tokeny. Z tego powodu w  realizuję tylko modele oparte na tokenach (token-level model). 
 
 Pierwszym krokiem jest zbudowania słownika tokenów, które mogą pojawić się w kodzie. Buduję go poprzez przetworzenie wszystkich kodów źródłowych obu zbiorów treningowego oraz 
 walidacyjnego modułem tokenize \cite{tokenize} wbudowanym w język Python. Moduł ten przyjmuje na wejściu kod źródłowy programu następnie zwraca listę kolejnych tokenów (nazw zmiennych, 
@@ -114,11 +166,6 @@ Każda testowana sieć trenowana jest przez 25 epoki. Wartość tą wybrałem na
 powyżej tej liczby model nie osiągał już lepszych rezultatów. Zbyt długi trening może również doprowadzić to przetrenowania modelu czego 
 należy unikać. 
 
-W treningu używam optymalizatora \begin{math}Adam\end{math} o domyślnych parametrach dla każdego z modeli.
-Wybór ten wynika z tego, że zależy mi na badaniu różnic wynikających z badanej architektury oraz odpowiednie strojenie optymalizatora typu SGD
-było by bardzo czasochłonne oraz bardzo komplikowałoby porównywanie ze sobą testowanych modeli. Jest to również optymalizator używany w pracach 
-do z którymi porównam uzyskane przeze mnie wyniki.  
-
 \subsection{Ewaluacja}
 Jako, że badane przeze mnie modele tworzone są z myślą użycia ich w postaci wtyczki do środowiska programistycznego nie ma sensu ocenianie ich na podstawie pierwszej, najlepszej predykcji. 
 Zamiast tego użyję dwóch następujących metryk: 
@@ -132,4 +179,18 @@ sortuje predykcje na podstawie prawdopodobieństwa ich wystąpienia. Należy uwz
 jego indeks w zbiorze zebranych predykcji. Dla przykładu powiedzmy, że model proponujący 10 sugestii zostaje użyty do wykonania 4 predykcji. Pierwsza wystąpi na 1. miejscu, druga na 3. miejscu, trzecia nie zmieści w w 10 najlepszych, 
 a czwarta na 8. miejscu. W takim przypadku ocena modelu będzie wynosić \begin{math}(\frac{1}{1}+ \frac{1}{3}+ 0 +\frac{1}{8})/4 = 0.36\end{math}. W ten sposób wyższe predykcje oceniane są zdecydowanie lepiej.
 Przy ocenie użyję 10 najlepszych sugestii.  Metryki tej używa Erik van Scharrenburg \cite{erik} w swojej pracy. Zastosowanie jej pozwoli na porównanie wyników. 
+
+\subsection{Szczegóły implementacji}
+todo
+\subsubsection{Problem słów poza słownikiem}
+todo
+\subsubsection{Rozmiar Słownika}
+todo
+\subsubsection{Wektory zanurzenia}
+todo
+\subsubsection{Optymalizator}
+W treningu używam optymalizatora \begin{math}Adam\end{math} o domyślnych parametrach dla każdego z modeli.
+Wybór ten wynika z tego, że zależy mi na badaniu różnic wynikających z badanej architektury oraz odpowiednie strojenie optymalizatora typu SGD
+było by bardzo czasochłonne oraz bardzo komplikowałoby porównywanie ze sobą testowanych modeli. Jest to również optymalizator używany w pracach 
+do z którymi porównam uzyskane przeze mnie wyniki.  
 
