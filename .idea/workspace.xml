@@ -21,13 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/my_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/my_eval.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/my_eval.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dokumentacja/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/main.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dokumentacja/tex/2-podloze_pracy.tex" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/tex/2-podloze_pracy.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dokumentacja/tex/3-metody.tex" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/tex/3-metody.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drivers/generate_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/generate_data.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/drivers/training_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/training_driver.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/generate_vocabulary.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/generate_vocabulary.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +78,7 @@
       <workItem from="1607171599248" duration="875000" />
       <workItem from="1607172492541" duration="84000" />
       <workItem from="1607172586525" duration="2311000" />
+      <workItem from="1607277376213" duration="1578000" />
     </task>
     <servers />
   </component>
