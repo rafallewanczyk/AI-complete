@@ -47,19 +47,35 @@ eksperymentów będzie zastosowanie tej techniki w moim zadaniu, oraz oceny skut
             \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{tak}                  & \multicolumn{1}{c|}{1}                  & \multicolumn{1}{c|}{126}                        & \multicolumn{1}{c|}{todo}                         \\ \hline
             \multicolumn{1}{|c|}{\multirow{2}{*}{15}} & \multicolumn{1}{c|}{\multirow{2}{*}{nie}} & \multicolumn{1}{c|}{\multirow{2}{*}{1}} & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{c|}{todo}                         \\ \cline{4-5} 
             \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{c|}{todo}                         \\ \hline
-                                                      &                                           &                                         &                                                 &                                                  
             \end{tabular}}
     \caption{Zestawienie wykonywanych eksperymentów} 
-    \end{table} 
+    \label{eksperymenty}
+\end{table} 
+Zdecydowałem że nie ma potrzeby testowania wszystkich możliwych kombinacji parametrów w tabeli, ponieważ zajęło by to bardzo dużo czasu, oraz już na podstawie prac 
+\cite{hellendoorn, pythia} możemy łatwo stwierdzić, że część kombinacji nie osiągnie konkurencyjnych wyników przy pozostałych, na przykład pojedyńcza warstwa LSTM, o 
+128 komórkach i długości okna równej \begin{math}1\end{math} jest zdecydowanie za prostym modelem aby przechwycić wszystkie zależności między danymi. 
+
 
 \subsection{Hipotezy}
-todo
-    
+Główną hipotezą dla pytania badawczego \ref{questions} jest to, że sieci rekurencyjne sieci neuronowe są w stanie w skuteczny sposób modelować języki programowania. Hipoteza 
+ta oparta jest na bardzo dobrych wynikach tego typu sieci w zadaniu modelowania języka naturalnego oraz dużego podobieństwa pomiędzy tymi tymi językami omówionymi wymienionymi 
+w sekcji \ref{similarities}. Hipotezę tą popierają również prace Hellendoorn, Devanbu\cite{hellendoorn} oraz Subhasis Das, Chinmayee Shah\cite{contextual_code_completion} uzyskując
+obiecujące wyniki przy wykorzystaniu unikalnych metod rozwiązania problemów wiążących się z językami programowania. 
 \subsection{Modelowanie tokenów}
 Jak pokazuje w swojej publikacji Hao Peng wraz z zespołem \cite{character-level} mimo tego, że modele budujące kolejne słowa poprzez 
 przewidywanie pojedyńczego znaku (character-level model) radzą sobie dobrze z modelowaniem języka naturalnego oraz rozwiązują problem rozmiaru słownika, 
 działają znacznie gorzej z językami programowania. Wniosek ten również potwierdza w swojej pracy Erik van Scharrenburg \cite{erik} porównując model przewidujący 
 znaki z modelem przewidującym tokeny. Z tego powodu w  realizuję tylko modele oparte na tokenach (token-level model). 
+\subsubsection{Podpytanie 1}
+todo
+\subsubsection{Podpytanie 2}
+todo
+\subsubsection{Podpytanie 3}
+todo
+\subsubsection{Podpytanie 4}
+todo
+\subsubsection{Podpytanie 5}
+todo
 
 Pierwszym krokiem jest zbudowania słownika tokenów, które mogą pojawić się w kodzie. Buduję go poprzez przetworzenie wszystkich kodów źródłowych obu zbiorów treningowego oraz 
 walidacyjnego modułem tokenize \cite{tokenize} wbudowanym w język Python. Moduł ten przyjmuje na wejściu kod źródłowy programu następnie zwraca listę kolejnych tokenów (nazw zmiennych, 
@@ -81,8 +97,8 @@ automatycznie. Na przykład z kodu źródłowego:
 otrzymamy listę \textbf{ [for, x, in, range, (, 2, 10, ), :, \textbackslash n, print, (, "hello world", )] }.
 Następnie sortuje wszystkie wygenerowane tokeny według częstości występowania oraz wybieram top-n tokenów jako słownik i każdemu z nich przypisuję unikalną liczbę naturalną. 
 Utworzony w ten sposób słownik nie jest kompletny ponieważ nie obejmuje on wszystkich możliwych nazw występujących w kodzie. Takiego rodzaju tokeny
-zostają zastąpione sztucznym tokenem '<UNKNOWN>'. W głównej mierze są to unikalne nazwy zmiennych oraz stringi. Zastępowanie tokenu '<UNKNOWN>' prawdziwym prawdziwym tokenem omówię w 
-poświęconym temu rozdziale. 
+zostają zastąpione sztucznym tokenem '<UNKNOWN>'. W głównej mierze są to unikalne nazwy zmiennych oraz stringi. Zastępowanie tokenu '<UNKNOWN>' prawdziwym prawdziwym tokenem omawiam w 
+rozdziale \ref{oov}
 
 \subsection{Wybór podzbioru danych}
 Jak już wspomniałem w sekcji \ref{sec:dataset-background} dotyczącej zbioru danych, trening odbywa sie na podzbiorze wszystkich zgromadzonych danych. W tym celu wybrałem 9 najpopularniejszych 
@@ -181,16 +197,59 @@ a czwarta na 8. miejscu. W takim przypadku ocena modelu będzie wynosić \begin{
 Przy ocenie użyję 10 najlepszych sugestii.  Metryki tej używa Erik van Scharrenburg \cite{erik} w swojej pracy. Zastosowanie jej pozwoli na porównanie wyników. 
 
 \subsection{Szczegóły implementacji}
-todo
 \subsubsection{Problem słów poza słownikiem}
-todo
+\label{oov}
+Największym wyzwaniem przy modelowaniu języka programowanie jest rozwiązanie problemu słów poza słownikiem opisanego w podrozdziale \ref{chellenges}. 
+Jednym z podejść zastosowanym przez Subhasis Das i Chinmayee Shah jest zastępowanie zastępowanie tokenów nie występujących w słowniku 
+specjalnymi tokenami pozycyjnymi. Tego typu tokenowi, który powtarza się więcej niż raz w sekwencji, zostaje przypisany indeks jego wystąpienia 
+odpowiadający jego pierwszemu wystąpieniu. W przypadku gdy przewidziany token nie mieści się w słowniku ale pojawił się wcześniej w 
+sekwencji zostaje zastąpiony wcześniej podaną nazwą. Rozwiązanie to sprawdza się bardzo dobrze dla zmiennych o tej samej nazwie, znajdujących 
+sie blisko siebie, na przykład w pętli \begin{math}for\end{math} języka \begin{math}C++\end{math}: 
+\begin{addmargin}[10mm]{0mm}
+    \begin{lstlisting}[
+        language=C++,
+        numbers=left,
+        firstnumber=1,
+        caption={Przeparsowana pętla for},
+        aboveskip=10pt
+    ]
+    for (int POS_TOKEN_01=0; POS_TOKEN_01<10; POST_TOKEN_01++)
+    \end{lstlisting}
+    \end{addmargin}
+Metoda ta jednak ogranicza się do długości badanej sekwencji, która jest bardzo krótka względem przeciętnej długości kodów programów.
+
+
+Inną metodą jest zastosowanie warstwy splotowej zamiast warstwy zanurzeń zaproponowaną przez Yoon Kim \cite{kim}. Metoda ta osiąga skuteczność 
+na poziomie najlepszych dotychczas znanych modeli jednak zastosowana jest dla modeli języka naturalnego opartego na znakach, przez co 
+prawdopodobnie nie sprawdziłaby się przy wybranych przeze mnie założeniach. 
+
+Hellendoorn wraz z Devanbu \cite{hellendoorn} proponują połączenie sieci rekurencyjnych z modelami statystycznymi \begin{math}N-gram\end{math}. Metoda ta pozwala na bardziej 
+ogólne predykcje. Pokazują również, że modele \begin{math}N-gram\end{math} radzą sobie lepie z przewidywaniem rzadko występujących unikalnych tokenów od sieci neuronowych, 
+oraz kombinacja tych modeli osiąga mniejszą entropię niż każdy z tych modeli osobno. 
+
+Swoje eksperymenty przeprowadzam właśnie z zastosowaniem kombinacji sieci rekurencyjnej z modelami unigram oraz bigram, preferując podpowiedzi wykonane przez bigram. Zastosowanie 
+większych modeli \begin{math}N-gram\end{math} nie ma sensu, ponieważ nałożyłoby to dodatkowe koszty obliczeniowe spowalniając wykonywanie predykcji, a generowany przez nie zbiór 
+byłby pusty w większości przypadków. 
+Stosuje tę metodę poprzez zastąpienie słów nie występujące w słowniku tokenem \begin{math}<UNKNOWN>\end{math} oraz uczę model przewidywać go w odpowiednich miejscach. Następnie jeśli pośród 
+zebranych predykcji znajdzie sie token \begin{math}<UNKNOWN>\end{math} zastępuje go zbiorem będącym sumą zbiorów predykcji unigramu oraz bigramu.  
 \subsubsection{Rozmiar Słownika}
-todo
+W eksperymentach z tabeli \ref{eksperymenty} stosuję stałą wartość rozmiaru słownika wynoszącą \begin{math}20000\end{math}. Odpowiada ona usunięciu słów które nie pojawiają sie w 
+zbiorze danych więcej niż \begin{math}18\end{math} razy. Odcięte zostają w głównej mierze nazwy zdefiniowanych funkcji, zmiennych oraz stringi.
+Wybór ten spowodowany jest tym, że wartość ta ma ogromny wpływ na czas treningu oraz rozmiar modelu zapisanego na dysku. 
+Wydłużony czas treningu spowodowany jest koniecznością obliczenia wartości funkcji \begin{math}softmax\end{math} dla każdego ze słów, natomiast dużo większy rozmiar wynika z konieczności 
+przeskalowania warstwy wejściowej oraz wyjściowej. Rozmiar ten różni się od rozmiarów wybranych w przytoczonych przeze mnie pracach które wynoszą odpowiednio 74064 \cite{hellendoorn} oraz 
+2000 \cite{contextual_code_completion}. W celu odpowiedzi na pytanie czy rozmiar słownika ma znaczenie na badanie modelu przeprowadzę jeden eksperyment polegający na treningu modelu o najlepszej 
+skuteczności na rozmiarze słownika 74064 zaproponowanego przez Hellendoorn'a \cite{hellendoorn}. 
+Przykłady odciętych tokenów w słowniku rozmiaru 20000:\\ \begin{math}accept\_inplace, IVGMM, book\_names, allvars, parent\_cards, 'references'\end{math}
 \subsubsection{Wektory zanurzenia}
-todo
+Wektory zanurzeń odpowiedzialne są za przypisaniu każdemu ze słów wektora, którym możemy wyrazić prawdopodobieństwo tokenu jako rezultat wielowarstwowej sieci neuronowej na wektorach 
+o ograniczonej liczbie tokenów sąsiednich. T. Milolv \cite{word2vec} pokazuje, że taki model wykrywa relacje między parami słów na przykład słowo 'król' ma sie do 'królowa' tak samo 
+jak 'mężczyzna' do 'kobieta'. Warstwa zanurzeń jets pierwszą warstwą w modelu.
+Wymiary wektorów zanurzeń są stałe dla każdego z wykonywanych eksperymentów oraz wynoszą one \begin{math}32\end{math}. Zdecydowałem się na mniejszy wymiar wektorów niż przedstawiony 
+w pracy \cite{hellendoorn}, która wynosiła 128 z powodu, że używam mniejszego słownika przez co znajduję się w nim dużo mniej zależności, które można wyrazić mniejszym wymiarem. 
 \subsubsection{Optymalizator}
 W treningu używam optymalizatora \begin{math}Adam\end{math} o domyślnych parametrach dla każdego z modeli.
 Wybór ten wynika z tego, że zależy mi na badaniu różnic wynikających z badanej architektury oraz odpowiednie strojenie optymalizatora typu SGD
 było by bardzo czasochłonne oraz bardzo komplikowałoby porównywanie ze sobą testowanych modeli. Jest to również optymalizator używany w pracach 
-do z którymi porównam uzyskane przeze mnie wyniki.  
+z którymi porównam uzyskane przeze mnie wyniki.  
 
