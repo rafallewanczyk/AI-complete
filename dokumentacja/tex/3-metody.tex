@@ -61,22 +61,35 @@ Główną hipotezą dla pytania badawczego \ref{questions} jest to, że sieci re
 ta oparta jest na bardzo dobrych wynikach tego typu sieci w zadaniu modelowania języka naturalnego oraz dużego podobieństwa pomiędzy tymi tymi językami omówionymi wymienionymi 
 w sekcji \ref{similarities}. Hipotezę tą popierają również prace Hellendoorn, Devanbu\cite{hellendoorn} oraz Subhasis Das, Chinmayee Shah\cite{contextual_code_completion} uzyskując
 obiecujące wyniki przy wykorzystaniu unikalnych metod rozwiązania problemów wiążących się z językami programowania. 
+\subsubsection{Podpytanie 1: Jaki jest wpływ długości sekwencji na predykcje?}
+Hipoteza zerowa stanowi, że wpływ długości sekwencji danych, na których odbywa się trening, oraz które używane są do wykonania predykcji nie ma wpływu na skuteczność działania 
+modelu. Hipoteza alternatywna mówi, że do pewnego momentu dłuższe sekwencje zapewniają lepszą jakość predykcji. Założenia te oparte są na pracach Alexey Svyatkovskiy z zespołem\cite{pythia}
+oraz Erika van Scharrenburg \cite{erik}
+\subsubsection{Podpytanie 2: Czy wielkość słownika ma wpływ na działanie modelu?}
+Hipoteza zerowa stanowi, że wielkość słownika nie wpływa na na jakość wykonywanych predykcji. Hipoteza alternatywna mówi, że większe słowniki radzą sobie lepiej, do 
+pewnego momentu, po czym pogarszają jakość całego modelu (skuteczność, rozmiar, szybkość). Hipoteza ta oparta jest o prace Hellendoorn'a i Devanbu \cite{hellendoorn}
+gdzie kolejne próby powiększania słownika nie przynosiły pozytywnych efektów. 
+\subsubsection{Podpytanie 3: Czy liczba warstw rekurencyjnej sieci neuronowej ma wpływ na działanie modelu?}
+Hipoteza zerowa stanowi, że liczba warstw rekurencyjnych użytych przy treningu nie wpływa na jakość uzyskanego modelu. Hipoteza alternatywna mówi, że łączenie ze sobą 
+kolejnych warstw sieci rekurencyjnych ma pozytywny wpływ na jakość modelu końcowego. Poparta jest ona pracą Afan Galih Salmana z zespołem\cite{multilstm}, w której 
+badają działanie łączenia ze sobą od 1 do 4 warstw LSTM w zadaniu przewidywania szeregów czasowych, z których wynika, że większa liczba warstw radzi sobie lepiej. 
+\subsubsection{Podpytanie 4: Czy liczba neuronów w warstwie wpływa na skuteczność modelu?}
+Hipoteza zerowa stanowi, że liczba wchodząca w skład pojedyńczej warstwy sieci rekurencyjnej nie ma wpływu na skuteczność modelu. Hipoteza alternatywna mówi, że 
+większa liczba neuronów osiąga większą skuteczność od tych o mniejszej liczbie. Hipoteza ta oparta jest na publikacji S. Chakraborty wraz z zespołem \cite{numberofunits}, 
+w której pokazują wzrost wydajności modelu opartego o sieć LSTM wraz ze wzrostem występujących neuronów w jego warstwie. 
+\subsubsection{Podpytanie 5: Czy układ warstw zastosowanych w modelu wpływa na skuteczność modelu?}
+Hipoteza zerowa stanowi, że układ warstw zastosowanych w modelu nie ma znaczenia na jego wydajność. Hipoteza alternatywna mówi, że zastosowanie dodatkowej warstwy 
+splotowej CNN poprawia działanie modelu. Hipoteza ta oparta jest o prace Kim'a \cite{kim}, któremu udało się w ten sposób poprawić jakość badanego modelu.  
+\subsubsection{Podpytanie 6: Czy rodzaj warstwy rekurencyjnej ma wpływ na skuteczność modelu?}
+Hipoteza zerowa stanowi, że rodzaj zastosowanej warstwy rekurencyjnej w zadaniu nie ma wpływu na działanie modelu. Hipoteza alternatywna mówi, że sieć LSTM sprawdza 
+się lepiej w zadaniu modelowania języków od sieci GRU. Hipoteza ta oparta jest na publikacji Apeksha Shewalkar i Deepika Nyavanandi i Simone A. Ludwig\cite{lstmvsgru}, 
+w której sieć LSTM osiągnęła najlepszą skuteczność ze wszystkich badanych rodzajów sieci. 
+
 \subsection{Modelowanie tokenów}
 Jak pokazuje w swojej publikacji Hao Peng wraz z zespołem \cite{character-level} mimo tego, że modele budujące kolejne słowa poprzez 
 przewidywanie pojedyńczego znaku (character-level model) radzą sobie dobrze z modelowaniem języka naturalnego oraz rozwiązują problem rozmiaru słownika, 
 działają znacznie gorzej z językami programowania. Wniosek ten również potwierdza w swojej pracy Erik van Scharrenburg \cite{erik} porównując model przewidujący 
 znaki z modelem przewidującym tokeny. Z tego powodu w  realizuję tylko modele oparte na tokenach (token-level model). 
-\subsubsection{Podpytanie 1}
-todo
-\subsubsection{Podpytanie 2}
-todo
-\subsubsection{Podpytanie 3}
-todo
-\subsubsection{Podpytanie 4}
-todo
-\subsubsection{Podpytanie 5}
-todo
-
 Pierwszym krokiem jest zbudowania słownika tokenów, które mogą pojawić się w kodzie. Buduję go poprzez przetworzenie wszystkich kodów źródłowych obu zbiorów treningowego oraz 
 walidacyjnego modułem tokenize \cite{tokenize} wbudowanym w język Python. Moduł ten przyjmuje na wejściu kod źródłowy programu następnie zwraca listę kolejnych tokenów (nazw zmiennych, 
 znaków specjalnych, słów kluczowych). Upewnia się on również czy kod jest poprawnie napisany np. czy wszystkie nawiasy lub apostrofy zostały zamknięte. Niepoprawne programy pomijam. 
