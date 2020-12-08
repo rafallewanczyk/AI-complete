@@ -55,7 +55,7 @@ class Model:
             for (batch_n, (x, y)) in enumerate(self.dataset.next_batch(tokenized_files, self.batch_size)):
                 loss = self.train_step(x, y)
                 if batch_n % 500 == 0:
-                    with open('.\\checkpoints\\losses.txt', 'a') as f:
+                    with open('..\\checkpoints\\losses.txt', 'a') as f:
                         f.write(loss.numpy().__str__())
                         f.write('\n')
                     print(f'Epoch {epoch} Batch {batch_n} Loss {loss} in {"%2f" % (time.time() - batch_start)}')
