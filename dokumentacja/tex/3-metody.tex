@@ -2,8 +2,8 @@
  
 
 \section{Użyte metody}
-W tym rozdziale opiszę użyte przez siebie metody prowadzące, od zbioru kodów źródłowych programów, do działającej wtyczki 
-przewidującej kolejny token w programie. Omówię również hipotezy zerowe oraz alternatywne dla pytań postawionych w wstępnym rozdziale.\\\\\\ 
+W tym rozdziale opiszę użyte przez siebie metody prowadzące, od zbioru kodów źródłowych programów, do działającego modelu 
+przewidującej kolejny token w programie. Omówię również hipotezy zerowe oraz alternatywne dla pytań postawionych w wstępnym rozdziale \ref{questions}.\\\\\\ 
 
 \subsection{Badane modele}
 Rekurencyjne sieci neuronowe należą do rodziny sieci służących do przetwarzania sekwencji danych o określonej długości. Jak pokazali w swojej publikacji 
@@ -51,35 +51,41 @@ eksperymentów będzie zastosowanie tej techniki w moim zadaniu, oraz oceny skut
     \caption{Zestawienie wykonywanych eksperymentów} 
     \label{eksperymenty}
 \end{table} 
-Zdecydowałem że nie ma potrzeby testowania wszystkich możliwych kombinacji parametrów w tabeli, ponieważ zajęło by to bardzo dużo czasu, oraz już na podstawie prac 
+Zdecydowałem, że nie ma potrzeby testowania wszystkich możliwych kombinacji parametrów w tabeli, ponieważ zajęło by to bardzo dużo czasu, oraz już na podstawie prac 
 \cite{hellendoorn, pythia} możemy łatwo stwierdzić, że część kombinacji nie osiągnie konkurencyjnych wyników przy pozostałych, na przykład pojedyńcza warstwa LSTM, o 
 128 komórkach i długości okna równej \begin{math}1\end{math} jest zdecydowanie za prostym modelem aby przechwycić wszystkie zależności między danymi. 
 
 
 \subsection{Hipotezy}
-Główną hipotezą dla pytania badawczego \ref{questions} jest to, że sieci rekurencyjne sieci neuronowe są w stanie w skuteczny sposób modelować języki programowania. Hipoteza 
-ta oparta jest na bardzo dobrych wynikach tego typu sieci w zadaniu modelowania języka naturalnego oraz dużego podobieństwa pomiędzy tymi tymi językami omówionymi wymienionymi 
-w sekcji \ref{similarities}. Hipotezę tą popierają również prace Hellendoorn, Devanbu\cite{hellendoorn} oraz Subhasis Das, Chinmayee Shah\cite{contextual_code_completion} uzyskując
+Główną hipotezą dla pytania badawczego \ref{questions} jest to, że rekurencyjne sieci neuronowe są w stanie w skuteczny sposób modelować języki programowania. Hipoteza 
+ta oparta jest na bardzo dobrych wynikach tego typu sieci w zadaniu modelowania języka naturalnego oraz dużego podobieństwa pomiędzy tymi tymi językami, omówionymi 
+w sekcji \ref{similarities}. Hipotezę tą popierają również prace Hellendoorn, Devanbu \cite{hellendoorn} oraz Subhasis Das, Chinmayee Shah \cite{contextual_code_completion} uzyskując
 obiecujące wyniki przy wykorzystaniu unikalnych metod rozwiązania problemów wiążących się z językami programowania. 
+
 \subsubsection{Podpytanie 1: Jaki jest wpływ długości sekwencji na predykcje?}
 Hipoteza zerowa stanowi, że wpływ długości sekwencji danych, na których odbywa się trening, oraz które używane są do wykonania predykcji nie ma wpływu na skuteczność działania 
 modelu. Hipoteza alternatywna mówi, że do pewnego momentu dłuższe sekwencje zapewniają lepszą jakość predykcji. Założenia te oparte są na pracach Alexey Svyatkovskiy z zespołem\cite{pythia}
 oraz Erika van Scharrenburg \cite{erik}
+
 \subsubsection{Podpytanie 2: Czy wielkość słownika ma wpływ na działanie modelu?}
 Hipoteza zerowa stanowi, że wielkość słownika nie wpływa na na jakość wykonywanych predykcji. Hipoteza alternatywna mówi, że większe słowniki radzą sobie lepiej, do 
 pewnego momentu, po czym pogarszają jakość całego modelu (skuteczność, rozmiar, szybkość). Hipoteza ta oparta jest o prace Hellendoorn'a i Devanbu \cite{hellendoorn}
 gdzie kolejne próby powiększania słownika nie przynosiły pozytywnych efektów. 
+
 \subsubsection{Podpytanie 3: Czy liczba warstw rekurencyjnej sieci neuronowej ma wpływ na działanie modelu?}
 Hipoteza zerowa stanowi, że liczba warstw rekurencyjnych użytych przy treningu nie wpływa na jakość uzyskanego modelu. Hipoteza alternatywna mówi, że łączenie ze sobą 
 kolejnych warstw sieci rekurencyjnych ma pozytywny wpływ na jakość modelu końcowego. Poparta jest ona pracą Afan Galih Salmana z zespołem\cite{multilstm}, w której 
-badają działanie łączenia ze sobą od 1 do 4 warstw LSTM w zadaniu przewidywania szeregów czasowych, z których wynika, że większa liczba warstw radzi sobie lepiej. 
+badają działanie łączenia ze sobą od 1 do 4 warstw LSTM, w zadaniu przewidywania szeregów czasowych, z których wynika, że większa liczba warstw radzi sobie lepiej. 
+
 \subsubsection{Podpytanie 4: Czy liczba neuronów w warstwie wpływa na skuteczność modelu?}
-Hipoteza zerowa stanowi, że liczba wchodząca w skład pojedyńczej warstwy sieci rekurencyjnej nie ma wpływu na skuteczność modelu. Hipoteza alternatywna mówi, że 
+Hipoteza zerowa stanowi, że liczba neuronów wchodząca w skład pojedyńczej warstwy sieci rekurencyjnej nie ma wpływu na skuteczność modelu. Hipoteza alternatywna mówi, że 
 większa liczba neuronów osiąga większą skuteczność od tych o mniejszej liczbie. Hipoteza ta oparta jest na publikacji S. Chakraborty wraz z zespołem \cite{numberofunits}, 
 w której pokazują wzrost wydajności modelu opartego o sieć LSTM wraz ze wzrostem występujących neuronów w jego warstwie. 
+
 \subsubsection{Podpytanie 5: Czy układ warstw zastosowanych w modelu wpływa na skuteczność modelu?}
 Hipoteza zerowa stanowi, że układ warstw zastosowanych w modelu nie ma znaczenia na jego wydajność. Hipoteza alternatywna mówi, że zastosowanie dodatkowej warstwy 
 splotowej CNN poprawia działanie modelu. Hipoteza ta oparta jest o prace Kim'a \cite{kim}, któremu udało się w ten sposób poprawić jakość badanego modelu.  
+
 \subsubsection{Podpytanie 6: Czy rodzaj warstwy rekurencyjnej ma wpływ na skuteczność modelu?}
 Hipoteza zerowa stanowi, że rodzaj zastosowanej warstwy rekurencyjnej w zadaniu nie ma wpływu na działanie modelu. Hipoteza alternatywna mówi, że sieć LSTM sprawdza 
 się lepiej w zadaniu modelowania języków od sieci GRU. Hipoteza ta oparta jest na publikacji Apeksha Shewalkar i Deepika Nyavanandi i Simone A. Ludwig\cite{lstmvsgru}, 
@@ -87,12 +93,13 @@ w której sieć LSTM osiągnęła najlepszą skuteczność ze wszystkich badanyc
 
 \subsection{Modelowanie tokenów}
 Jak pokazuje w swojej publikacji Hao Peng wraz z zespołem \cite{character-level} mimo tego, że modele budujące kolejne słowa poprzez 
-przewidywanie pojedyńczego znaku (character-level model) radzą sobie dobrze z modelowaniem języka naturalnego oraz rozwiązują problem rozmiaru słownika, 
+przewidywanie pojedyńczego znaku (character-level model) radzą sobie dobrze z modelowaniem języka naturalnego, oraz rozwiązują problem rozmiaru słownika, 
 działają znacznie gorzej z językami programowania. Wniosek ten również potwierdza w swojej pracy Erik van Scharrenburg \cite{erik} porównując model przewidujący 
 znaki z modelem przewidującym tokeny. Z tego powodu w  realizuję tylko modele oparte na tokenach (token-level model). 
+
 Pierwszym krokiem jest zbudowania słownika tokenów, które mogą pojawić się w kodzie. Buduję go poprzez przetworzenie wszystkich kodów źródłowych obu zbiorów treningowego oraz 
 walidacyjnego modułem tokenize \cite{tokenize} wbudowanym w język Python. Moduł ten przyjmuje na wejściu kod źródłowy programu następnie zwraca listę kolejnych tokenów (nazw zmiennych, 
-znaków specjalnych, słów kluczowych). Upewnia się on również czy kod jest poprawnie napisany np. czy wszystkie nawiasy lub apostrofy zostały zamknięte. Niepoprawne programy pomijam. 
+znaków specjalnych, słów kluczowych). Upewnia się on również czy kod jest poprawnie napisany, na przykład czy wszystkie nawiasy lub apostrofy zostały zamknięte. Niepoprawne programy pomijam. 
 Znaki nowej lini również traktuję jako token, jednak nie uwzględniam wcięć w kodzie ze względu na to, że większość środowisk programistycznych stawia je 
 automatycznie. Na przykład z kodu źródłowego: 
 \begin{addmargin}[10mm]{0mm}
@@ -107,15 +114,15 @@ automatycznie. Na przykład z kodu źródłowego:
         print("hello world")
     \end{lstlisting}
     \end{addmargin}
-otrzymamy listę \textbf{ [for, x, in, range, (, 2, 10, ), :, \textbackslash n, print, (, "hello world", )] }.
+otrzymamy listę \textbf{ [for, x, in, range, (, 2, 10, ), :, \textbackslash n, print, (, "hello world", )]}.
 Następnie sortuje wszystkie wygenerowane tokeny według częstości występowania oraz wybieram top-n tokenów jako słownik i każdemu z nich przypisuję unikalną liczbę naturalną. 
 Utworzony w ten sposób słownik nie jest kompletny ponieważ nie obejmuje on wszystkich możliwych nazw występujących w kodzie. Takiego rodzaju tokeny
-zostają zastąpione sztucznym tokenem '<UNKNOWN>'. W głównej mierze są to unikalne nazwy zmiennych oraz stringi. Zastępowanie tokenu '<UNKNOWN>' prawdziwym prawdziwym tokenem omawiam w 
+zostają zastąpione sztucznym tokenem '<UNKNOWN>'. W głównej mierze są to unikalne nazwy zmiennych oraz ciągi znaków. Zastępowanie tokenu '<UNKNOWN>' prawdziwym prawdziwym tokenem omawiam w 
 rozdziale \ref{oov}
 
 \subsection{Wybór podzbioru danych}
-Jak już wspomniałem w sekcji \ref{sec:dataset-background} dotyczącej zbioru danych, trening odbywa sie na podzbiorze wszystkich zgromadzonych danych. W tym celu wybrałem 9 najpopularniejszych 
-zewnętrznych bibliotek języka Python stosowanych do zróżnicowanych dziedzin rozwoju oprogramowania. Poniżej zamieszam listę wybranych bibliotek wraz z krótkim opisem:
+Jak już wspomniałem w sekcji \ref{sec:dataset-background} dotyczącej zbioru danych, trening odbywa sie na podzbiorze wszystkich zgromadzonych danych. W tym celu wybrałem 9 najpopularniejszych, 
+zewnętrznych bibliotek języka Python, stosowanych w zróżnicowanych dziedzinach rozwoju oprogramowania. Poniżej zamieszczam listę wybranych bibliotek, wraz z krótkim opisem:
 \begin{itemize}
     \item Django - rozwój aplikacji sieciowych
     \item Numpy - wykonywanie obliczeń matematycznych wysokiego poziomu
@@ -149,8 +156,8 @@ liczbą plików źródłowych na platformie GitHub \cite{github}.
     \end{tabular}
 \end{table}
 
-Jak możemy zaobserwować stosunek liczby plików jest dosyć zbliżony dla większości wybranych bibliotek wynosi około 0.015\%, z wyjątkiem 
-bibliotek uczenia maszynowego. Może to wynikać z tego, że dane pochodzą z 2018 roku oraz jest to czas, w którym istniały początkowe wersje tych bibliotek oraz dopiero
+Jak możemy zaobserwować stosunek liczby plików jest dosyć zbliżony dla większości wybranych bibliotek wynosi około 0.015\%. Wyjątkami są 
+biblioteki uczenia maszynowego. Może to wynikać z tego, że dane pochodzą z 2018 roku. Jest to czas, w którym istniały początkowe wersje tych bibliotek oraz dopiero
 zaczynały zyskiwać na popularności. Od tego czasu również biblioteka Keras została scalona z biblioteką TensorFlow co znacznie wpłynęło na jej popularność w dzisiejszych czasach. 
 
 Uznaję, że dane w wystarczająco dobrym stopniu oddają częstotliwość zastosowania bibliotek. Końcowy podzbiór stworzyłem poprzez wybranie 1\% plików źródłowych z każdej biblioteki. 
@@ -168,7 +175,7 @@ Końcowe zestawienie prezentuje się w następujący sposób:
         Tokeny & 114641650 & 9118453 & 4482600 \\ \hline
     \end{tabular}
 \end{table}
-Rozmiar wykorzystanego zbioru danych jest podobny do zbioru użytego w publikacjach Vincent J. Hellendoorn i Premkumar Devanbu \cite{hellendoorn} w którym użyto 16 milionów tokenów do treningu, oraz 
+Rozmiar wykorzystanego zbioru danych różni się do zbioru użytego w publikacjach Vincent J. Hellendoorn i Premkumar Devanbu \cite{hellendoorn} w którym użyto 16 milionów tokenów do treningu, oraz 
 5 milionów tokenów w celach walidacji. Na różnicę tą zdecydowałem się ze względu na ograniczenia sprzętowe różniące oba projekty. 
 
 
@@ -184,24 +191,26 @@ z tokenów z okna.
 Minimalizowana funkcja strat jest entropią krzyżową pomiędzy prawdopodobieństwami \begin{math}softmax\end{math} dla każdego możliwego wyjścia 
 a wykonaną predykcją.Funkcja wyrażoną wzorem: \\\\
 \centerline{\begin{math}L = log(\frac{e^{s_{t_o}}}{\sum_{j}e^{s_{t_j}}})\end{math}}\\\\
-gdzie \begin{math}t_o\end{math} jest zaobserwowanym tokenem wyjściowym a \begin{math}g_i\end{math} wyjściem \begin{math}i^{th}\end{math} komórki
+gdzie \begin{math}t_o\end{math} jest zaobserwowanym tokenem wyjściowym a \begin{math}g_i\end{math} wyjściem \begin{math}i-tej\end{math} komórki
 którejś z badanych sieci rekurencyjnych. 
 
-Wagi sieci aktualizowane są po przetworzeniu porcji danych (mini-batch) której rozmiar jest stały. Przy treningach sieci rekurencyjnych rozmiar
+Wagi sieci aktualizowane są po przetworzeniu porcji danych (mini-batch), której rozmiar jest stały. Przy treningach sieci rekurencyjnych rozmiar
 ten jest jedną z wartości kluczowych dla dobrej wydajności sieci. W moich eksperymentach wynosi on 128. Jest to kompromis pomiędzy rozsądnym 
 czasem treningu oraz jakością wyjściowych sugestii. Jest to również najczęściej wybierana wartość w przytoczonych przeze mnie publikacjach.
 
-Każda testowana sieć trenowana jest przez 25 epoki. Wartość tą wybrałem na podstawie własnych eksperymentów wstępnych, z których wynika, że 
-powyżej tej liczby model nie osiągał już lepszych rezultatów. Zbyt długi trening może również doprowadzić to przetrenowania modelu czego 
+Każda testowana architektura trenowana jest przez 25 epoki. Wartość tą wybrałem na podstawie własnych eksperymentów wstępnych, z których wynika, że 
+powyżej tej liczby model nie osiągał już lepszych rezultatów. Zbyt długi trening może również doprowadzić to przetrenowania modelu, czego 
 należy unikać. 
 
 \subsection{Ewaluacja}
 Jako, że badane przeze mnie modele tworzone są z myślą użycia ich w postaci wtyczki do środowiska programistycznego nie ma sensu ocenianie ich na podstawie pierwszej, najlepszej predykcji. 
 Zamiast tego użyję dwóch następujących metryk: 
+
 \subsubsection{Ewaluacja bez uwzględnienia kolejności}
 Jeśli poszukiwane słowo znajduje się w pierwszych \begin{math}n\end{math} najlepszych predykcjach, bez znaczenia na którym miejscu uważam sugestię za poprawną. Metodę tą zastosowano przy ocenianiu systemów
 Pythia \cite{pythia} dla której \begin{math}n = 5\end{math} oraz w pracy autorstwa Subhasis Das i Chinmayee Shah \cite{contextual_code_completion} gdzie \begin{math}n = 3\end{math}. Zastosowanie jej pozwoli na porównanie 
 wyników z tymi publikacjami. 
+
 \subsubsection{Ewaluacja z uwzględnieniem kolejności}
 Jednym z przytoczonym problemów we wstępie \ref{sec:intro} jest to, że wiele wtyczek nie uwzględnia kolejności sugestii oraz proponuje je na przykład posortowane leksykograficznie. Proponowane przeze mnie rozwiązanie 
 sortuje predykcje na podstawie prawdopodobieństwa ich wystąpienia. Należy uwzględnić tą kolejność w metryce. Ocena obliczana jest poprzez podzielenie prawdopodobieństwa poprawnego poprawnej predykcji przez 
@@ -213,7 +222,7 @@ Przy ocenie użyję 10 najlepszych sugestii.  Metryki tej używa Erik van Scharr
 \subsubsection{Problem słów poza słownikiem}
 \label{oov}
 Największym wyzwaniem przy modelowaniu języka programowanie jest rozwiązanie problemu słów poza słownikiem opisanego w podrozdziale \ref{chellenges}. 
-Jednym z podejść zastosowanym przez Subhasis Das i Chinmayee Shah jest zastępowanie zastępowanie tokenów nie występujących w słowniku 
+Jednym z podejść zastosowanym przez Subhasis Das i Chinmayee Shah jest zastępowanie tokenów nie występujących w słowniku 
 specjalnymi tokenami pozycyjnymi. Tego typu tokenowi, który powtarza się więcej niż raz w sekwencji, zostaje przypisany indeks jego wystąpienia 
 odpowiadający jego pierwszemu wystąpieniu. W przypadku gdy przewidziany token nie mieści się w słowniku ale pojawił się wcześniej w 
 sekwencji zostaje zastąpiony wcześniej podaną nazwą. Rozwiązanie to sprawdza się bardzo dobrze dla zmiennych o tej samej nazwie, znajdujących 
@@ -233,7 +242,7 @@ Metoda ta jednak ogranicza się do długości badanej sekwencji, która jest bar
 
 
 Inną metodą jest zastosowanie warstwy splotowej zamiast warstwy zanurzeń zaproponowaną przez Yoon Kim \cite{kim}. Metoda ta osiąga skuteczność 
-na poziomie najlepszych dotychczas znanych modeli jednak zastosowana jest dla modeli języka naturalnego opartego na znakach, przez co 
+na poziomie najlepszych dotychczas znanych modeli, jednak zastosowana jest dla modeli języka naturalnego opartego na znakach, przez co 
 prawdopodobnie nie sprawdziłaby się przy wybranych przeze mnie założeniach. 
 
 Hellendoorn wraz z Devanbu \cite{hellendoorn} proponują połączenie sieci rekurencyjnych z modelami statystycznymi \begin{math}N-gram\end{math}. Metoda ta pozwala na bardziej 
@@ -242,12 +251,12 @@ oraz kombinacja tych modeli osiąga mniejszą entropię niż każdy z tych model
 
 Swoje eksperymenty przeprowadzam właśnie z zastosowaniem kombinacji sieci rekurencyjnej z modelami unigram oraz bigram, preferując podpowiedzi wykonane przez bigram. Zastosowanie 
 większych modeli \begin{math}N-gram\end{math} nie ma sensu, ponieważ nałożyłoby to dodatkowe koszty obliczeniowe spowalniając wykonywanie predykcji, a generowany przez nie zbiór 
-byłby pusty w większości przypadków. 
+byłby w większości przypadków pusty. 
 Stosuje tę metodę poprzez zastąpienie słów nie występujące w słowniku tokenem \begin{math}<UNKNOWN>\end{math} oraz uczę model przewidywać go w odpowiednich miejscach. Następnie jeśli pośród 
 zebranych predykcji znajdzie sie token \begin{math}<UNKNOWN>\end{math} zastępuje go zbiorem będącym sumą zbiorów predykcji unigramu oraz bigramu.  
 \subsubsection{Rozmiar Słownika}
 W eksperymentach z tabeli \ref{eksperymenty} stosuję stałą wartość rozmiaru słownika wynoszącą \begin{math}20000\end{math}. Odpowiada ona usunięciu słów które nie pojawiają sie w 
-zbiorze danych więcej niż \begin{math}18\end{math} razy. Odcięte zostają w głównej mierze nazwy zdefiniowanych funkcji, zmiennych oraz stringi.
+zbiorze danych więcej niż \begin{math}18\end{math} razy. Odcięte zostają w głównej mierze nazwy zdefiniowanych funkcji, zmiennych oraz ciągi znaków.
 Wybór ten spowodowany jest tym, że wartość ta ma ogromny wpływ na czas treningu oraz rozmiar modelu zapisanego na dysku. 
 Wydłużony czas treningu spowodowany jest koniecznością obliczenia wartości funkcji \begin{math}softmax\end{math} dla każdego ze słów, natomiast dużo większy rozmiar wynika z konieczności 
 przeskalowania warstwy wejściowej oraz wyjściowej. Rozmiar ten różni się od rozmiarów wybranych w przytoczonych przeze mnie pracach które wynoszą odpowiednio 74064 \cite{hellendoorn} oraz 
@@ -255,14 +264,14 @@ przeskalowania warstwy wejściowej oraz wyjściowej. Rozmiar ten różni się od
 skuteczności na rozmiarze słownika 74064 zaproponowanego przez Hellendoorn'a \cite{hellendoorn}. 
 Przykłady odciętych tokenów w słowniku rozmiaru 20000:\\ \begin{math}accept\_inplace, IVGMM, book\_names, allvars, parent\_cards, 'references'\end{math}
 \subsubsection{Wektory zanurzenia}
-Wektory zanurzeń odpowiedzialne są za przypisaniu każdemu ze słów wektora, którym możemy wyrazić prawdopodobieństwo tokenu jako rezultat wielowarstwowej sieci neuronowej na wektorach 
+Wektory zanurzeń odpowiedzialne są za przypisanie każdemu ze słów wektora, którym możemy wyrazić prawdopodobieństwo tokenu jako rezultat wielowarstwowej sieci neuronowej na wektorach 
 o ograniczonej liczbie tokenów sąsiednich. T. Milolv \cite{word2vec} pokazuje, że taki model wykrywa relacje między parami słów na przykład słowo 'król' ma sie do 'królowa' tak samo 
 jak 'mężczyzna' do 'kobieta'. Warstwa zanurzeń jets pierwszą warstwą w modelu.
 Wymiary wektorów zanurzeń są stałe dla każdego z wykonywanych eksperymentów oraz wynoszą one \begin{math}32\end{math}. Zdecydowałem się na mniejszy wymiar wektorów niż przedstawiony 
 w pracy \cite{hellendoorn}, która wynosiła 128 z powodu, że używam mniejszego słownika przez co znajduję się w nim dużo mniej zależności, które można wyrazić mniejszym wymiarem. 
 \subsubsection{Optymalizator}
 W treningu używam optymalizatora \begin{math}Adam\end{math} o domyślnych parametrach dla każdego z modeli.
-Wybór ten wynika z tego, że zależy mi na badaniu różnic wynikających z badanej architektury oraz odpowiednie strojenie optymalizatora typu SGD
-było by bardzo czasochłonne oraz bardzo komplikowałoby porównywanie ze sobą testowanych modeli. Jest to również optymalizator używany w pracach 
+Wybór ten wynika z tego, że zależy mi na badaniu różnic wynikających z badanej architektury. Odpowiednie strojenie optymalizatora typu SGD
+było by bardzo czasochłonne oraz komplikowałoby porównywanie ze sobą testowanych modeli. Jest to również optymalizator używany w pracach 
 z którymi porównam uzyskane przeze mnie wyniki.  
 
