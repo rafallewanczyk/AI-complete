@@ -1,0 +1,30 @@
+Model: "sequential_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+embedding_1 (Embedding)      (128, None, 32)           640032
+_________________________________________________________________
+lstm_1 (LSTM)                (128, None, 256)          295936
+_________________________________________________________________
+dense_1 (Dense)              (128, None, 20001)        5140257
+=================================================================
+Total params: 6,076,225
+Trainable params: 6,076,225
+Non-trainable params: 0
+_________________________________________________________________
+
+vocab_size = 20001
+embedding_dim = 32 #CONST
+rnn_units = 256
+batch_size = 128 #CONST
+win_size = 5
+
+ def build_model(self):
+        self.model = Sequential()
+        self.model.add(Embedding(self.vocab_size, self.embedding_dim, batch_input_shape=[self.batch_size, None]))
+        # self.model.add(Convolution1D(self.embedding_dim, kernel_size=1, activation='relu'))
+        self.model.add(
+            LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+        # self.model.add(
+        #     GRU(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+        self.model.add(Dense(self.vocab_size))
