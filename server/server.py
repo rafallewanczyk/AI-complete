@@ -11,21 +11,27 @@ Send a POST request:
     curl -d "foo=bar&bin=baz" http://localhost:8000
 """
 import argparse
+import tensorflow as tf
 import json
+import numpy as np
+import pickle as pk
 from message import Message
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from src.model import Model
+from src.ngram import Ngram
+import src.utils as utils
 
 
 class S(BaseHTTPRequestHandler):
-
-    vocab_size = 10001
-    embedding_dim = 128
+    physical_devices = tf.config.list_physical_devices('GPU')
+    tf.config.experimental.set_memory_growth(physical_devices[0], enable=True)
+    vocab_size = 20001  # CONST
+    embedding_dim = 32  # CONST
     rnn_units = 512
-    batch_size = 128
-    win_size = 10
-    model = Model(vocab_size, embedding_dim, rnn_units, batch_size, win_size)
-    model.prepare_predictions('..\\src\\vocab10k', '..\\checkpoints\\10k.h5')
+    batch_size = 128  # CONST
+    win_size = 1
+    model = Model(vocab_size, embedding_dim, rnn_units, batch_size, win_size, '..\\checkpoints\\1\\model.h5')
+    model.prepare_predictions('..\\drivers\\vocabulary.voc', '..\\checkpoints\\1\\model.h5')
 
 
     def _set_headers(self):
@@ -52,12 +58,25 @@ class S(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
         msg = (Message(**json.loads(post_data)))
-        prediction = self.model.get_prediction(msg.code, 100 )
+        print("received:\n", msg.code)
+
+        #get RNN prediction
+        prediction = self.model.get_prediction(msg.code)
+
+        #get Ngram prediction
+        tokenized_file = utils.tokenize_string(msg.code)
+        if '<UNK>' in prediction:
+            trigram = Ngram(3, tokenized_file)
+            bigram = Ngram(2, tokenized_file)
+            grams = trigram.predict(tokenized_file) + bigram.predict(tokenized_file)
+            grams = [p[0] for p in grams]
+            grams = list(dict.fromkeys(grams))[:5]
+            prediction[prediction.index('<UNK>')] = grams
+            prediction = np.hstack(prediction).tolist()
         print(prediction)
-        # print("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n", str(self.path), str(self.headers),
-        #       post_data.decode('utf-8'))
+
         self._set_headers()
-        self.wfile.write(self._html(''.join(prediction[0])))
+        self.wfile.write(bytes('#'.join(prediction[:5]), encoding='utf-8'))
 
 
 def run(server_class=HTTPServer, handler_class=S, addr="localhost", port=8000):

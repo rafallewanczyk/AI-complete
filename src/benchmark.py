@@ -9,12 +9,14 @@ def single_benchmark(model, target_file, html=False):
 
     result = HTML(target_file)
     if len(tokenized_file) == 0:
-        return 0, 0, 0, 0
+        return 0, 0, 0, 0, 0, 0
 
     proper_predictions = 0
+    top_1 = 0
     top_3 = 0
     top_5 = 0
-    ranked = 0
+    ranked_5 = 0
+    ranked_10 = 0
     total_predictions = 0
     prediction = model.get_prediction(tokenized_file[0], 10, 1)
     for i, token in enumerate(tokenized_file[1:], 1):
@@ -28,6 +30,9 @@ def single_benchmark(model, target_file, html=False):
             prediction[prediction.index('<UNK>')] = grams
             prediction = np.hstack(prediction).tolist()
 
+        if token in prediction[:1]:
+            top_1 += 1
+
         if token in prediction[:3]:
             top_3 += 1
 
@@ -35,8 +40,11 @@ def single_benchmark(model, target_file, html=False):
             top_5 += 1
             result.add_correct(token)
 
+        if token in prediction[:5]:
+            ranked_5 += 1/(prediction.index(token)+1)
+
         if token in prediction[:10]:
-            ranked += 1/(prediction.index(token)+1)
+            ranked_10 += 1/(prediction.index(token)+1)
 
 
         # elif prediction[0] == '<UNK>':
@@ -66,7 +74,7 @@ def single_benchmark(model, target_file, html=False):
     if html:
         result.render(top_5, total_predictions)
         result.save(target_file, f'top_5: {"%.2f" % (top_5/ total_predictions)}')
-    return top_3, top_5, ranked, total_predictions
+    return top_1, top_3, top_5, ranked_5, ranked_10, total_predictions
 
 
 class HTML:
