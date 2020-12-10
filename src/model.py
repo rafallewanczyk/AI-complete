@@ -80,7 +80,7 @@ class Model:
         self.compile(mode='predict')
         print(self.model.summary())
 
-    def get_prediction(self, seed_string, number=1):
+    def get_prediction(self, seed_string, k=5, number=1):
         input_tokens = self.dataset.token2id(utils.tokenize_string(seed_string))
         if len(input_tokens) == 0:
             return ['<UNK>']
@@ -95,7 +95,7 @@ class Model:
             predictions = self.predict(input_tokens)
             predictions = tf.squeeze(predictions, 0)
             predicted_id = tf.math.argmax(predictions[-1]).numpy()
-            predicted_ids = tf.math.top_k(predictions[-1], k=5)
+            predicted_ids = tf.math.top_k(predictions[-1], k=k)
 
             input_tokens = tf.expand_dims([predicted_id], 0)
 
