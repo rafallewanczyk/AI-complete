@@ -13,7 +13,7 @@ from src.dataset import Dataset
 
 class Model:
 
-    def __init__(self, vocab_size, embedding_dim, rnn_units, batch_size, win_size, checkpoint_name):
+    def __init__(self, vocab_size, embedding_dim, rnn_units, batch_size, win_size, checkpoint_name, loss_name):
         self.vocab_size = vocab_size
         self.embedding_dim = embedding_dim
         self.rnn_units = rnn_units
@@ -21,6 +21,7 @@ class Model:
         self.win_size = win_size
         self.optimizer = tf.keras.optimizers.Adam()
         self.checkpoint_name = checkpoint_name
+        self.loss_name = loss_name
 
     def build_model(self):
         self.model = Sequential()
@@ -55,7 +56,7 @@ class Model:
             for (batch_n, (x, y)) in enumerate(self.dataset.next_batch(tokenized_files, self.batch_size)):
                 loss = self.train_step(x, y)
                 if batch_n % 500 == 0:
-                    with open('..\\checkpoints\\losses.txt', 'a') as f:
+                    with open(self.loss_name, 'a') as f:
                         f.write(loss.numpy().__str__())
                         f.write('\n')
                     print(f'Epoch {epoch} Batch {batch_n} Loss {loss} in {"%2f" % (time.time() - batch_start)}')
