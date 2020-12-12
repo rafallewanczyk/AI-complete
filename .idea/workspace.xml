@@ -21,11 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI-complete.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI-complete.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/1/nn.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/1/nn.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/drivers/prediction_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/prediction_driver.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmark.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmark.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/training_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/training_driver.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +31,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="document" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JupyterTrust" id="707ca847-f4cf-4413-a264-20bc911a0217" />
@@ -57,6 +60,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\4" />
       <recent name="C:\Users\Lewanczyk\_inz\ai-complete\drivers" />
     </key>
   </component>
