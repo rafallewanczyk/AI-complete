@@ -8,10 +8,6 @@ class Generator:
         predictions = r.text.split('#')
 
         if '\n' in predictions:
-            predictions[predictions.index('\n')] = '&lt;ENTER&gt;'
+            predictions[predictions.index('\n')] = '<ENTER>'
 
-        if '<UNK>' in predictions:
-            predictions[predictions.index('<UNK>')] = '&lt;UNK&gt;'
-        merged = '<br>'
-        merged = merged.join(predictions)
-        return merged
+        return predictions

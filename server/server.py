@@ -29,9 +29,9 @@ class S(BaseHTTPRequestHandler):
     embedding_dim = 32  # CONST
     rnn_units = 512
     batch_size = 128  # CONST
-    win_size = 1
-    model = Model(vocab_size, embedding_dim, rnn_units, batch_size, win_size, '..\\checkpoints\\1\\model.h5', None)
-    model.prepare_predictions('..\\drivers\\vocabulary.voc', '..\\checkpoints\\1\\model.h5')
+    win_size = 5
+    model = Model(vocab_size, embedding_dim, rnn_units, batch_size, win_size, '..\\checkpoints\\4\\model.h5', None)
+    model.prepare_predictions('..\\drivers\\vocabulary.voc', '..\\checkpoints\\4\\model.h5')
 
 
     def _set_headers(self):
