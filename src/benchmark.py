@@ -5,9 +5,9 @@ from tqdm.auto import tqdm
 
 
 def single_benchmark(model, target_file, html=False):
-    tokenized_file = utils.my_tokenize(target_file)
+    tokenized_file = target_file[1]
 
-    result = HTML(target_file)
+    result = HTML(target_file[0])
     if len(tokenized_file) == 0:
         return 0, 0, 0, 0, 0, 0
 
