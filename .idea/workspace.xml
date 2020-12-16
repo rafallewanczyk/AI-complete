@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drivers/training_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/training_driver.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generate_vocabulary.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/generate_vocabulary.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokumentacja/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokumentacja/tex/2-podloze_pracy.tex" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/tex/2-podloze_pracy.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokumentacja/tex/4-eksperymenty.tex" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/tex/4-eksperymenty.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +78,7 @@
       <workItem from="1607172492541" duration="84000" />
       <workItem from="1607172586525" duration="2311000" />
       <workItem from="1607277376213" duration="1578000" />
+      <workItem from="1608125447580" duration="639000" />
     </task>
     <servers />
   </component>
@@ -114,10 +114,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1607172576064" />
-    <state x="626" y="275" key="SettingsEditor" timestamp="1607173069992">
+    <state x="626" y="275" key="SettingsEditor" timestamp="1608125623307">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="626" y="275" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1607173069992" />
+    <state x="626" y="275" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1608125623307" />
     <state x="782" y="346" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1606405092210" />
   </component>
 </project>
