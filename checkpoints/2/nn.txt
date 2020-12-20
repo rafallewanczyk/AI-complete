@@ -28,3 +28,10 @@ win_size = 5
         # self.model.add(
         #     GRU(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         self.model.add(Dense(self.vocab_size))
+
+accuracies:
+	top_1: 0.23
+	top_3: 0.46
+	top_5: 0.59
+	ranked_5: 0.36
+	ranked_10: 0.37

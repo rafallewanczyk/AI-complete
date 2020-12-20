@@ -21,9 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drivers/prediction_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/prediction_driver.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/2/nn.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/2/nn.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/3/nn.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/3/nn.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/4/nn.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/4/nn.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/5/nn.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/5/nn.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/6/nn.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/6/nn.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/drivers/training_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/training_driver.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmark.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmark.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,10 +64,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\10" />
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\8" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\6" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\5" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\4" />
-      <recent name="C:\Users\Lewanczyk\_inz\ai-complete\drivers" />
     </key>
   </component>
   <component name="RunManager">
@@ -118,6 +123,8 @@
       <workItem from="1607277376213" duration="1578000" />
       <workItem from="1607466402878" duration="1787000" />
       <workItem from="1607947244094" duration="1576000" />
+      <workItem from="1608230992542" duration="2972000" />
+      <workItem from="1608470036586" duration="85000" />
     </task>
     <servers />
   </component>
@@ -189,7 +196,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
           <url>notebook://C:/Users/01133357/Documents/_praca_inzynierska/ai-complete/drivers/prediction_driver.ipynb</url>
-          <line>65</line>
+          <line>66</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
