@@ -29,8 +29,8 @@ class Model:
         # self.model.add(Convolution1D(self.embedding_dim, kernel_size=1, activation='relu'))
         self.model.add(
             LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
-        self.model.add(
-            LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+        # self.model.add(
+        #     LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         # self.model.add(
         #     GRU(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         self.model.add(Dense(self.vocab_size))

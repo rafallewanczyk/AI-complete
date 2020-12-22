@@ -22,6 +22,7 @@
     <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/drivers/training_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/training_driver.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,11 +59,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\9" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\10" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\8" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\6" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\5" />
-      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\4" />
     </key>
   </component>
   <component name="RunManager">
@@ -119,7 +120,8 @@
       <workItem from="1607947244094" duration="1576000" />
       <workItem from="1608230992542" duration="2972000" />
       <workItem from="1608470036586" duration="85000" />
-      <workItem from="1608471010837" duration="2783000" />
+      <workItem from="1608471010837" duration="3327000" />
+      <workItem from="1608558324663" duration="1871000" />
     </task>
     <servers />
   </component>
@@ -139,22 +141,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2005" height="376" key="GridCell.Tab.0.bottom" timestamp="1608127393055">
+    <state width="2005" height="307" key="GridCell.Tab.0.bottom" timestamp="1608558308902">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="376" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1608127393055" />
-    <state width="2005" height="376" key="GridCell.Tab.0.center" timestamp="1608127393055">
+    <state width="2005" height="307" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1608558308902" />
+    <state width="2005" height="307" key="GridCell.Tab.0.center" timestamp="1608558308902">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="376" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1608127393055" />
-    <state width="2005" height="376" key="GridCell.Tab.0.left" timestamp="1608127393054">
+    <state width="2005" height="307" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1608558308902" />
+    <state width="2005" height="307" key="GridCell.Tab.0.left" timestamp="1608558308902">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="376" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1608127393054" />
-    <state width="2005" height="376" key="GridCell.Tab.0.right" timestamp="1608127393055">
+    <state width="2005" height="307" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1608558308902" />
+    <state width="2005" height="307" key="GridCell.Tab.0.right" timestamp="1608558308902">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="376" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1608127393055" />
+    <state width="2005" height="307" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1608558308902" />
     <state width="2005" height="376" key="GridCell.Tab.1.bottom" timestamp="1608127393055">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
