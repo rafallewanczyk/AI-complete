@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drivers/training_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/training_driver.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,11 +58,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\7" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\9" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\10" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\8" />
       <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\6" />
-      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\5" />
     </key>
   </component>
   <component name="RunManager">
@@ -121,7 +120,8 @@
       <workItem from="1608230992542" duration="2972000" />
       <workItem from="1608470036586" duration="85000" />
       <workItem from="1608471010837" duration="3327000" />
-      <workItem from="1608558324663" duration="1871000" />
+      <workItem from="1608558324663" duration="2199000" />
+      <workItem from="1608630464937" duration="286000" />
     </task>
     <servers />
   </component>
