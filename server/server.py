@@ -27,11 +27,11 @@ class S(BaseHTTPRequestHandler):
     tf.config.experimental.set_memory_growth(physical_devices[0], enable=True)
     vocab_size = 20001  # CONST
     embedding_dim = 32  # CONST
-    rnn_units = 512
+    rnn_units = 128
     batch_size = 128  # CONST
     win_size = 5
-    model = Model(vocab_size, embedding_dim, rnn_units, batch_size, win_size, '..\\checkpoints\\4\\model.h5', None)
-    model.prepare_predictions('..\\drivers\\vocabulary.voc', '..\\checkpoints\\4\\model.h5')
+    model = Model(vocab_size, embedding_dim, rnn_units, batch_size, win_size, '..\\checkpoints\\9\\model.h5', None)
+    model.prepare_predictions('..\\drivers\\vocabulary.voc', '..\\checkpoints\\9\\model.h5')
 
 
     def _set_headers(self):

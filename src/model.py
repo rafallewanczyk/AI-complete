@@ -27,12 +27,14 @@ class Model:
         self.model = Sequential()
         self.model.add(Embedding(self.vocab_size, self.embedding_dim, batch_input_shape=[self.batch_size, None]))
         # self.model.add(Convolution1D(self.embedding_dim, kernel_size=1, activation='relu'))
-        self.model.add(
-            LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         # self.model.add(
         #     LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         # self.model.add(
-        #     GRU(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+        #     LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+        self.model.add(
+            LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+        self.model.add(
+            LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         self.model.add(Dense(self.vocab_size))
 
     def compile(self, mode='training'):
