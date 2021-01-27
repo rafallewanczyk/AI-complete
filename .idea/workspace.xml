@@ -19,16 +19,31 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="" />
+    <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/checkpoints/14/loss.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoints/14/model.h5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoints/15/loss.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoints/15/model.h5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoints/all_losses.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/training_driver.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/training_driver.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="document" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="JupyterTrust" id="e15d08f5-7f5d-4aa1-87e9-806de8f9277a" />
+  <component name="JupyterTrust" id="707ca847-f4cf-4413-a264-20bc911a0217" />
   <component name="ProjectId" id="1kpjK7SIM0Y0Xj39ye79bQiHh3p" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -50,9 +65,66 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Lewanczyk\_inz\ai-complete\drivers" />
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\14" />
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\12" />
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\11" />
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\7" />
+      <recent name="C:\Users\01133357\Documents\_praca_inzynierska\ai-complete\checkpoints\9" />
     </key>
   </component>
+  <component name="RunManager" selected="Python.server">
+    <configuration name="AI-complete" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ai-complete" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/AppData/Roaming/Sublime Text 3/Packages/User" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Roaming/Sublime Text 3/Packages/User/AI-complete.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ai-complete" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/server" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server/server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.server" />
+        <item itemvalue="Python.AI-complete" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -67,12 +139,32 @@
       <workItem from="1606407133092" duration="677000" />
       <workItem from="1606408235456" duration="7417000" />
       <workItem from="1606505665916" duration="305000" />
-      <workItem from="1606509939957" duration="8017000" />
+      <workItem from="1606509939957" duration="8778000" />
+      <workItem from="1606572949108" duration="3583000" />
+      <workItem from="1607171599248" duration="875000" />
+      <workItem from="1607172492541" duration="84000" />
+      <workItem from="1607172586525" duration="2311000" />
+      <workItem from="1607277376213" duration="1578000" />
+      <workItem from="1607466402878" duration="1787000" />
+      <workItem from="1607947244094" duration="1576000" />
+      <workItem from="1608230992542" duration="2972000" />
+      <workItem from="1608470036586" duration="85000" />
+      <workItem from="1608471010837" duration="3327000" />
+      <workItem from="1608558324663" duration="2199000" />
+      <workItem from="1608630464937" duration="286000" />
+      <workItem from="1608630889662" duration="932000" />
+      <workItem from="1608753629057" duration="1671000" />
+      <workItem from="1610108644437" duration="8215000" />
+      <workItem from="1610233968281" duration="2554000" />
+      <workItem from="1611002782408" duration="1634000" />
+      <workItem from="1611494345662" duration="496000" />
+      <workItem from="1611657733031" duration="811000" />
+      <workItem from="1611773687812" duration="649000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -84,11 +176,77 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="782" y="346" key="SettingsEditor" timestamp="1606405092210">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="802" y="358" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610189725303">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="802" y="358" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2048.1112@0.0.2048.1112" timestamp="1610189725303" />
+    <state width="2005" height="208" key="GridCell.Tab.0.bottom" timestamp="1611691368765">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="208" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1611691368765" />
+    <state width="2005" height="208" key="GridCell.Tab.0.center" timestamp="1611691368765">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="208" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1611691368765" />
+    <state width="2005" height="208" key="GridCell.Tab.0.left" timestamp="1611691368765">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="208" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1611691368765" />
+    <state width="2005" height="208" key="GridCell.Tab.0.right" timestamp="1611691368765">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="208" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1611691368765" />
+    <state width="2005" height="376" key="GridCell.Tab.1.bottom" timestamp="1608127393055">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1608127393055" />
+    <state width="2005" height="376" key="GridCell.Tab.1.center" timestamp="1608127393055">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.center/0.0.2048.1112@0.0.2048.1112" timestamp="1608127393055" />
+    <state width="2005" height="376" key="GridCell.Tab.1.left" timestamp="1608127393055">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.left/0.0.2048.1112@0.0.2048.1112" timestamp="1608127393055" />
+    <state width="2005" height="376" key="GridCell.Tab.1.right" timestamp="1608127393055">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.right/0.0.2048.1112@0.0.2048.1112" timestamp="1608127393055" />
+    <state x="626" y="275" key="SettingsEditor" timestamp="1607173069992">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="626" y="275" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1607173069992" />
     <state x="782" y="346" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1606405092210" />
+    <state x="0" y="0" width="1683" height="689" key="dock-window-1" timestamp="1610109162663">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="0" y="0" width="1683" height="689" key="dock-window-1/0.0.2048.1112@0.0.2048.1112" timestamp="1610109162663" />
+    <state x="1198" y="248" width="672" height="678" key="search.everywhere.popup" timestamp="1607635637906">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="1198" y="248" width="672" height="678" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1607635637906" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/server.py</url>
+          <line>57</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook://C:/Users/01133357/Documents/_praca_inzynierska/ai-complete/drivers/prediction_driver.ipynb</url>
+          <line>66</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ai_complete$server.coverage" NAME="server Coverage Results" MODIFIED="1611657741045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
+    <SUITE FILE_PATH="coverage/ai_complete$AI_complete.coverage" NAME="AI-complete Coverage Results" MODIFIED="1611003949986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Roaming/Sublime Text 3/Packages/User" />
   </component>
 </project>

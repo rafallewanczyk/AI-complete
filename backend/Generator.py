@@ -1,11 +1,13 @@
-class Generator : 
+import requests
 
-	def generate(input): 
-		output = [input] * 5 
-		for i in range (0, 5): 
-			output[i] += chr(i + 97) * i + '<br>'
-		 
-		merged = ''
-		merged = merged.join(output)
-		merged = ''.join(merged.split())
-		return merged
+
+class Generator:
+
+    def generate(input):
+        r = requests.post('http://127.0.0.1:8000', json={"file_name": "name", "code": input})
+        predictions = r.text.split('#')
+
+        if '\n' in predictions:
+            predictions[predictions.index('\n')] = '<ENTER>'
+
+        return predictions
