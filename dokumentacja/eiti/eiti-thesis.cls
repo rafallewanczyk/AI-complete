@@ -64,7 +64,7 @@
 \RequirePackage{url}        % URL-sensitive line breaks
 \RequirePackage{xkeyval}    % Keys and class parameters
 \RequirePackage{xspace}     % Remove duplicated spaces
-
+\RequirePackage{xcolor}
 %--------------------------------------
 % PdfTeX specific configuration
 %--------------------------------------

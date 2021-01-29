@@ -1,0 +1,33 @@
+\newpage % Rozdziały zaczynamy od nowej strony.
+ 
+
+\section{Analiza przeprowadzonych eksperymentów}
+
+\subsection{Zbadane architektury}
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{\begin{tabular}{cccclll}
+        \hline
+        \multicolumn{1}{|c|}{Długość sekwencji}   & \multicolumn{1}{c|}{Warstwa CNN}          & \multicolumn{1}{c|}{Liczba warstw LSTM} & \multicolumn{1}{c|}{Liczba neuronów w warstwie} & \multicolumn{1}{l|}{Top 3} & \multicolumn{1}{l|}{Top 5} & \multicolumn{1}{l|}{Top 10 z kolejnością} \\ \hline
+        \multicolumn{1}{|c|}{1}                   & \multicolumn{1}{c|}{nie}                  & \multicolumn{1}{c|}{1}                  & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \hline
+        \multicolumn{1}{|c|}{\multirow{5}{*}{5}}  & \multicolumn{1}{c|}{\multirow{4}{*}{nie}} & \multicolumn{1}{c|}{\multirow{3}{*}{1}} & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \cline{4-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{256}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \cline{4-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \cline{3-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{2}                  & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \cline{2-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{tak}                  & \multicolumn{1}{c|}{1}                  & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \hline
+        \multicolumn{1}{|c|}{\multirow{5}{*}{10}} & \multicolumn{1}{c|}{\multirow{4}{*}{nie}} & \multicolumn{1}{c|}{\multirow{2}{*}{1}} & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \cline{4-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \cline{3-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{2}                  & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{00}    & \multicolumn{1}{l|}{0}                    \\ \cline{3-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{2}                  & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \cline{2-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{tak}                  & \multicolumn{1}{c|}{1}                  & \multicolumn{1}{c|}{126}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \hline
+        \multicolumn{1}{|c|}{\multirow{2}{*}{15}} & \multicolumn{1}{c|}{\multirow{2}{*}{nie}} & \multicolumn{1}{c|}{\multirow{2}{*}{1}} & \multicolumn{1}{c|}{128}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \cline{4-7} 
+        \multicolumn{1}{|c|}{}                    & \multicolumn{1}{c|}{}                     & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{512}                        & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{0}                    \\ \hline
+                                                  &                                           &                                         &                                                 &                            &                            &                                          
+        \end{tabular}}
+    \caption{Uzyskane skuteczności w eksperymentach} 
+    \label{wyniki}
+\end{table} 
+\subsection{Wyróżniona architektura}
+\subsection{Różne rozmiary słownika}
+\subsection{Zastosowanie warstwy GRU}
+\subsection{Najlepsza znaleziona architektura}

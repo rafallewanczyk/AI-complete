@@ -25,7 +25,7 @@ class Model:
     def build_model(self):
         self.model = Sequential()
         self.model.add(Embedding(self.vocab_size, self.embedding_dim, batch_input_shape=[self.batch_size, None]))
-        self.model.add(Convolution1D(self.embedding_dim, kernel_size=1, activation='relu'))
+        # self.model.add(Convolution1D(self.embedding_dim, kernel_size=1, activation='relu'))
         self.model.add(
             LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         # self.model.add(
@@ -56,9 +56,9 @@ class Model:
                 loss = self.train_step(x, y)
                 if batch_n % 500 == 0:
                     with open('.\\checkpoints\\losses.txt', 'a') as f:
-                            f.write(loss.numpy().__str__())
-                            f.write('\n')
-                    print(f'Epoch {epoch} Batch {batch_n} Loss {loss} in {"%2f" %(time.time()-batch_start)}')
+                        f.write(loss.numpy().__str__())
+                        f.write('\n')
+                    print(f'Epoch {epoch} Batch {batch_n} Loss {loss} in {"%2f" % (time.time() - batch_start)}')
                     batch_start = time.time()
 
                 if batch_n % 1000 == 0:
@@ -87,30 +87,19 @@ class Model:
         input_tokens = tf.expand_dims(input_tokens, 0)
 
         predictions = []
-        predicted_ids =[]
+        predicted_ids = []
         text = []
-        temperature = 1.0
 
         self.model.reset_states()
         for i in range(number):
             predictions = self.predict(input_tokens)
-            # remove the batch dimension
             predictions = tf.squeeze(predictions, 0)
-            # using a categorical distribution to predict the character returned by the model
-            predictions = predictions / temperature
             predicted_id = tf.math.argmax(predictions[-1]).numpy()
             predicted_ids = tf.math.top_k(predictions[-1], k=5)
-            # predicted_id = tf.random.categorical(predictions, num_samples=1)[-1, 0].numpy()
 
-            # Pass the predicted character as the next input to the model
-            # along with the previous hidden state
-            input_tokens= tf.expand_dims([predicted_id], 0)
+            input_tokens = tf.expand_dims([predicted_id], 0)
 
-            # text.append(self.dataset.id2token([predicted_id])[0])
-        # return ' '.join(text)
         return self.dataset.id2token(predicted_ids[1].numpy())
-
-
 
     def predict(self, x):
         return self.model(x)
@@ -130,8 +119,6 @@ class Model:
         with open(vocab_path, 'rb') as f:
             vocab = pickle.load(f)
         return vocab
-
-
 
     def load(self, name):
         self.model.load_weights(name)

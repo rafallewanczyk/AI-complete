@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="" />
+    <list default="true" id="ea853fc1-e925-416c-af8e-02110ad2b910" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/dokumentacja/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokumentacja/tex/2-podloze_pracy.tex" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/tex/2-podloze_pracy.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokumentacja/tex/4-eksperymenty.tex" beforeDir="false" afterPath="$PROJECT_DIR$/dokumentacja/tex/4-eksperymenty.tex" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="JupyterTrust" id="e15d08f5-7f5d-4aa1-87e9-806de8f9277a" />
+  <component name="JupyterTrust" id="707ca847-f4cf-4413-a264-20bc911a0217" />
   <component name="ProjectId" id="1kpjK7SIM0Y0Xj39ye79bQiHh3p" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -53,6 +57,7 @@
       <recent name="C:\Users\Lewanczyk\_inz\ai-complete\drivers" />
     </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -67,12 +72,18 @@
       <workItem from="1606407133092" duration="677000" />
       <workItem from="1606408235456" duration="7417000" />
       <workItem from="1606505665916" duration="305000" />
-      <workItem from="1606509939957" duration="8017000" />
+      <workItem from="1606509939957" duration="8778000" />
+      <workItem from="1606572949108" duration="3583000" />
+      <workItem from="1607171599248" duration="875000" />
+      <workItem from="1607172492541" duration="84000" />
+      <workItem from="1607172586525" duration="2311000" />
+      <workItem from="1607277376213" duration="1578000" />
+      <workItem from="1608125447580" duration="639000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -84,11 +95,29 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="782" y="346" key="SettingsEditor" timestamp="1606405092210">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1607172576064">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1607172576064" />
+    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1607172576064">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1607172576064" />
+    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1607172576064">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1607172576064" />
+    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1607172576064">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1607172576064" />
+    <state x="626" y="275" key="SettingsEditor" timestamp="1608125623307">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="626" y="275" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1608125623307" />
     <state x="782" y="346" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1606405092210" />
   </component>
 </project>

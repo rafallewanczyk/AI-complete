@@ -25,15 +25,15 @@
 %--------------------------------------
 \EngineerThesis % Dla pracy inżynierskiej mamy \EngineerThesis
 \instytut{Informatyki}
-\kierunek{Inforamtyka}
+\kierunek{Informatyka}
 \specjalnosc{Inżynieria Systemów Informacyjnych}
 \title{
-    Generowanie automatycznych podpowiedzi \\w środowiskach do programowaniaa
+    Generowanie automatycznych podpowiedzi \\w środowiskach do programowania
 }
 \engtitle{ % Tytuł po angielsku do angielskiego streszczenia
     Generating code autocompletions for Integrated Development Environments 
 }
-\author{\{Rafał Lewanczyk\}}
+\author{Rafał Lewanczyk}
 \album{293140}
 \promotor{Paweł Zawistowski}
 \date{\the\year}
@@ -43,14 +43,14 @@
 % Streszczenie po polsku
 %--------------------------------------
 \cleardoublepage % Zaczynamy od nieparzystej strony
-\streszczenie \lipsum[1-3]
+\streszczenie TODO\\\lipsum[1-3]
 \slowakluczowe XXX, XXX, XXX
 
 %--------------------------------------
 % Streszczenie po angielsku
 %--------------------------------------
 \newpage
-\abstract \kant[1-3]
+\abstract TODO\\\kant[1-3]
 \keywords XXX, XXX, XXX
 
 %--------------------------------------
@@ -73,13 +73,13 @@
 \pagestyle{headings}
 
 \input{tex/1-wstep}         % Wygodnie jest trzymać każdy rozdział w osobnym pliku.
-\input{tex/2-de-finibus}    % Umożliwia to również łatwą migrację do nowej wersji szablonu:
-\input{tex/3-code-listings} % wystarczy podmienić swoje pliki main.tex i eiti-thesis.cls
+\input{tex/2-podloze_pracy}    % Umożliwia to również łatwą migrację do nowej wersji szablonu:
+\input{tex/3-metody} % wystarczy podmienić swoje pliki main.tex i eiti-thesis.cls
                             % na nowe wersje, a cały tekst pracy pozostaje nienaruszony.
+\input{tex/4-eksperymenty}
+\input{tex/5-implementacja-wtyczki}
+\input{tex/6-podsumowanie}
 
-\newpage % Rozdziały zaczynamy od nowej strony
-\section{Summatio}          % Można też pisać rozdziały w jednym pliku.
-\lipsum[5-10]
 
 %--------------------------------------------
 % Literatura
