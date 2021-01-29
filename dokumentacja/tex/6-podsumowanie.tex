@@ -4,3 +4,52 @@
 \section{Podsumowanie}
 
 
+  
+  \begin{description}
+    \item[Omówienie] 
+    \hfill \\ W swojej pracy przedstawiam zastosowanie rekurencyjnych sieci neuronowych do autouzupełniania kodu źródłowego. W swoich 
+    eksperymentach uzyskałem model osiągający skuteczność równą \begin{math}68\%\end{math} dla 5 pierwszych predykcji oraz 
+    \begin{math}46\%\end{math} po uwzględnieniu kolejności ich wystąpienia. Badam również wpływ hiperparametrów takich jak 
+    długość sekwencji wejściowej, rodzaje warstw sieci rekurencyjnych, układ warstw sieci, rozmiar słownika i
+    ilość neuronów w warstwie. Pokazuję, że w zadaniu przewidywania kodu lepiej działają modele, w których skład wchodzi 
+    kilka warstw o małej ilości neuronów oraz długości sekwencji wejściowych liczące 10 słów. \\
+
+    \item[Napotkane problemy]
+    \hfill\\
+        \label{chellenges}
+    Głównym wyzwaniem oraz detalem różniącym języki programowania od języków naturalnych, jest możliwość nadawania dowolnych
+    nazw obiektom oraz metodom, przez co nie można objąć wszystkich słów w słowniku danych treningowych. Słowa tego typu 
+    nazywane są słowami poza słownikiem. Zwiększanie wielkości słownika nigdy nie obejmie wszystkich możliwych nazw, natomiast 
+    bardzo spowolni ostatni krok algorytmu, którym jest obliczenie wyznaczenie funkcji softmax. Jak zostało pokazane w publikacji 
+    \cite{hellendoorn} od pewnego momentu większy rozmiar słownika zaczyna wpływać negatywnie na skuteczność modelu. \\
+
+
+    Nadmierne dopasowanie modelu do danych treningowych może wystąpić przy zbyt długim treningu. Taki model 
+    zacznie dawać bardzo dobre predykcje na zbiorze treningowym jednak bardzo słabo poradzi sobie na zbiorze 
+    walidacyjnym. Zamiast zgeneralizować problem model nauczy się danych treningowych 'na pamięć'.\\
+
+
+    Ostatnim napotkanym przeze mnie problemem były ograniczenia wynikające ze sprzętu. Aby trening sieci skończył się w 
+    sensownym czasie musi się on odbywać na karcie graficznej. Nie ma serwisu udostępniającego moc obliczeniową tych 
+    kart za darmo na wystarczająco długi czas.  \\
+    \item[Dalsze prace] 
+    \hfill \\ 
+\begin{description}
+    \item[Poprawa modelu] 
+    \hfill \\ Dalsze badania dotyczące hiperparametrów np. długości sekwencji wejściowych z przedziału (5, 10) i (10, 15) jak i 
+    wielokrotne treningi modelu mogą znacznie wpłynąć na poprawę uzyskanych w tej pracy wyników. Ze względu na ograniczenia czasowe, 
+    modele testowane w tej pracy były trenowane przez względnie krótki czas. Wydłużenie czasu treningu również powinno pozytywnie 
+    wpłynąć na model końcowy. 
+     \\
+    \item[Inne języki programowania] 
+    \hfill \\ Ze względu na bardzo duże podobieństwa między językami programowania, warto zbadać zachowanie przedstawionych modeli 
+    na językach innych niż Python. Zastosowane w tej pracy rozwiązania bardzo łatwo adaptują się do eksperymentów z innymi danymi
+    wejściowymi. Możemy oczekiwać innych rezultatów dla języków statycznych takich jak Java lub języków deklaratywnych np. SQL. \\
+    \item[Rozszerzenie dla innych środowisk programowania]
+    \hfill \\ Wtyczka w tej pracy została zaimplementowana tylko dla środowiska SublimeText 3, jednak ze względu na jej prostą oraz 
+    rozszerzalną budowę bardzo łatwo wprowadzić ją do innych środowisk programistycznych. Dzięki architekturze serwerowej może obsługiwać 
+    wiele klientów jednocześnie, oraz po przeniesieniu do chmury nie wymagałaby pobierania sieci neuronowej i bibliotek uczenia maszynowego 
+    na komputer użytkownika.\\
+  \end{description}
+
+  \end{description}

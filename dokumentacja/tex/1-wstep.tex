@@ -1,63 +1,79 @@
 \newpage % Rozdziały zaczynamy od nowej strony.
 \section{Wstęp}
 \label{sec:intro}
-Środowiska programistyczne ułatwiają i przyśpieszają pisanie kodu poprzez proponowanie 
+Środowiska programistyczne ułatwiają i przyśpieszają pisanie kodu m.in. poprzez proponowanie 
 słów kluczowych oraz nazw zdefiniowanych w programie. Dzięki tej funkcji programista nie musi pisać ręcznie 
 w całości długiej nazwy zmiennej lub metody, a w niektórych przypadkach nie musi pisać jej wcale. 
-Przykładem takiego zachowania jest zaproponowanie słowa kluczowego 'except' po słowie 'try' w języku Python,
-lub propozycja nazwy zmiennej poprzez przechowywanie wszystkich zmiennych w słowniku.  
-Jednak takie podejście wiążę się z wieloma wadami: 
+% Przykładem takiego zachowania jest zaproponowanie słowa kluczowego 'except' po słowie 'try' w języku Python,
+% lub propozycja nazwy zmiennej poprzez przechowywanie wszystkich zmiennych w słowniku.  
+Podejście to charakteryzuję się parsowaniem na bieżąco kodu programu, oraz na podstawie reguł rządzących danym 
+językiem programowania, proponowania nazw znajdujących sie w jego drzewie rozkładu, lub zaproponowaniu któregoś 
+ze słów kluczowych na podstawie wcześniejszych ich wystąpień. Przykładem takiego zachowania może być zaproponowanie 
+bloku \begin{math}else\end{math} po bloku \begin{math}if\end{math}. 
+Jednak takie podejście wiążę się z wieloma wadami.
 \begin{itemize}
 	\item Stworzenie takiego systemu uzupełniającego wiąże się ze zdefiniowaniem wielu skomplikowanych
 	reguł, które różnią się dla każdego języka programowania. 
 	\item System generujący propozycje nie uwzględnia kontekstu pisanego kodu. Na przykład w kodzie 
 	aplikacji internetowej można zaobserwować wiele powtarzających się szablonów, które będą się różnić 
 	od szablonów występujących w kodzie jądra systemu operacyjnego. 
-	\item Podpowiedzi wygenerowane w ten sposób zazwyczaj ograniczają sie tylko do tylko jednego kolejnego słowa 
-	\item W takim Systemie propozycje często są podawane w kolejności nie będącą zbyt pomocną dla programisty, 
-	na przykład posortowane leksykograficznie. 
+	\item Taki system ma problem z ocenieniem, która podpowiedź ma największe prawdopodobieństwo
+	pojawienia się, przez co często podaje je, w z góry założonej kolejności np. posortowane leksykograficznie. 
 \end{itemize}
-
-\subsection {Problem}
+\subsection{Problem}
+\begin{description}
+\item[Problem]
+\hfill\\
 Istnieje wiele rodzajów uzupełniania kodu: 
 \begin{itemize}
-	\item przewidzenie kolejnego słowa (tokenu) 
-	\item przewidzenie dłuższej sekwencji słów (na przykład dokończenie linijki)
-	\item generowanie funkcji, na podstawie jej opisu w komentarzu
-	\item uzupełnianie brakujących linii lub tokenów, w zaznaczonych miejscach w kodzie
+	\item przewidzenie kolejnego słowa (tokenu),
+	\item przewidzenie dłuższej sekwencji słów (na przykład dokończenie linijki),
+	\item generowanie funkcji, na podstawie jej opisu w komentarzu,
+	\item uzupełnianie brakujących linii lub tokenów, w zaznaczonych miejscach w kodzie.
 \end{itemize}
 W tej pracy skupiam się na pierwszym z rodzajów tego problemu. Moim celem jest stworzenie systemu, który rozwiąże 
-wcześniej wymienione problemy, sprawdzenie czy zaproponowane przeze mnie rozwiązanie jest akceptowalne oraz 
-zaimplementowanie go jako wtyczka do środowiska SublimeText. 
+wcześniej wymienione problemy, oraz zaimplementowanie go jako wtyczka do środowiska SublimeText. \\
 
-\subsection {Kod a język naturalny}
+\item[Kod a język naturalny]
+\hfill\\
 \label{similarities}
-Metody statystyczne oraz rekurencyjne sieci neuronowe osiągają bardzo dobre rezultaty w generowaniu tekstów. 
-Języki programowania dzielą wiele cech wspólnych z językiem naturalnym. Oba są używane do opisywania algorytmów 
-w skończonej liczbie kroków. Logika stojąca za wyrażaniem kolejnych kroków jest taka sama. Oba języki używane są 
+Metody statystyczne oraz rekurencyjne sieci neuronowe mają swoje zastosowanie w bardzo dużej ilości dziedzin, m.in. 
+predykcji, klasyfikacji lub filtracji sygnałów. Rozwiązywany przeze mnie problem jest specjalnym przypadkiem problemu 
+klasyfikacji, który opiszę w dalszej części pracy. Z tego względu zdecydowałem się właśnie na zastosowanie ich w moim rozwiązaniu.  
+
+Języki programowania dzielą wiele cech wspólnych z językiem naturalnym.
+Jednym z zastosowań języka naturalnego jest opisywanie algorytmów w skończonej liczbie kroków, co jest również jedynym zastosowaniem 
+języków programowania. Logika stojąca za wyrażaniem kolejnych kroków jest taka sama. Oba typy języków używane są 
 do komunikacji, naturalny używany pomiędzy ludźmi, natomiast programowania między człowiekiem a komputerem. 
 Jednak najważniejszą łączącą je cechą jest ich powtarzalność. W obu z dużym prawdopodobieństwem po jednym 
-słowie może wystąpić tyko niewielki zbiór innych słów. 
+słowie może wystąpić tyko względnie niewielki zbiór innych słów. 
 
-\subsection {Wyzwania}
-\label{chellenges}
-Głównym wyzwaniem oraz detalem różniącym języki programowania od języków naturalnych, jest możliwość nadawania dowolnych
-nazw obiektom oraz metodom, przez co nie można objąć wszystkich słów w słowniku danych treningowych. Słowa tego typu 
-nazywane są słowami poza słownikiem. Zwiększanie wielkości słownika nigdy nie obejmie wszystkich możliwych nazw, natomiast 
-bardzo spowolni ostatni krok algorytmu, którym jest obliczenie wyznaczenie funkcji softmax. Jak zostało pokazane w publikacji 
-\cite{hellendoorn} od pewnego momentu większy rozmiar słownika zaczyna wpływać negatywnie na skuteczność modelu. 
+Istotną różnicą dzielącą te rodzaje języków jest możliwość nadawania dowolnych nazw obiektom oraz metodom w językach programowania. 
+Powoduje to, że nie można objąć wszystkich slów w słowniku danych treningowych. Słowa tego typu nazywane są słowami poza 
+słownikiem. Różnica ta jest na tyle znacząca, że powoduje konieczność wprowadzenia zmian adaptacyjnych w 
+metodach dotyczących modelowania języka naturalnego. \\
 
-Nadmierne dopasowanie modelu do danych treningowych może wystąpić przy zbyt długim treningu. Taki model 
-zacznie dawać bardzo dobre predykcje na zbiorze treningowym jednak bardzo słabo poradzi sobie na zbiorze 
-walidacyjnym. Zamiast zgeneralizować problem model nauczy się danych treningowych 'na pamięć'. 
+% \subsection {Wyzwania}
+% \label{chellenges}
+% Głównym wyzwaniem oraz detalem różniącym języki programowania od języków naturalnych, jest możliwość nadawania dowolnych
+% nazw obiektom oraz metodom, przez co nie można objąć wszystkich słów w słowniku danych treningowych. Słowa tego typu 
+% nazywane są słowami poza słownikiem. Zwiększanie wielkości słownika nigdy nie obejmie wszystkich możliwych nazw, natomiast 
+% bardzo spowolni ostatni krok algorytmu, którym jest obliczenie wyznaczenie funkcji softmax. Jak zostało pokazane w publikacji 
+% \cite{hellendoorn} od pewnego momentu większy rozmiar słownika zaczyna wpływać negatywnie na skuteczność modelu. 
 
-Przewidywanie kilku tokenów w przód. Omawiany w tej pracy model, jest w stanie wykonywać kilka predykcji w przód,  
-jednak znacząco utrudnia to zadanie inżynierskie oraz miałoby negatywny wpływ na korzystanie ze wtyczki 
-w warunkach rzeczywistych. Całkowita skuteczność modelu o skuteczności wynoszącej na przykład {70\%} dla pojedyńczych 
-tokenów przy próbie przewidzenia 3 tokenów w przód spadłaby do \begin{math}0.7^3 = 0.343\end{math}, co było by nieakceptowalne 
-w warunkach rzeczywistych. 
+% Nadmierne dopasowanie modelu do danych treningowych może wystąpić przy zbyt długim treningu. Taki model 
+% zacznie dawać bardzo dobre predykcje na zbiorze treningowym jednak bardzo słabo poradzi sobie na zbiorze 
+% walidacyjnym. Zamiast zgeneralizować problem model nauczy się danych treningowych 'na pamięć'. 
 
-\subsection {Zastosowania}
+% Przewidywanie kilku tokenów w przód. Omawiany w tej pracy model, jest w stanie wykonywać kilka predykcji w przód,  
+% jednak znacząco utrudnia to zadanie inżynierskie oraz miałoby negatywny wpływ na korzystanie ze wtyczki 
+% w warunkach rzeczywistych. Całkowita skuteczność modelu o skuteczności wynoszącej na przykład {70\%} dla pojedyńczych 
+% tokenów przy próbie przewidzenia 3 tokenów w przód spadłaby do \begin{math}0.7^3 = 0.343\end{math}, co było by nieakceptowalne 
+% w warunkach rzeczywistych. 
+
+\item [Zastosowania]
+\hfill\\
+\label{zastosowania}
 Główny zastosowaniem tworzonego systemu jest usprawnienie pracy programisty. Jednak przy założeniu, że model działa dobrze 
 istnieje więcej przypadków użycia: 
 \begin{itemize}
@@ -74,17 +90,10 @@ istnieje więcej przypadków użycia:
 	na podstawie kilku pierwszych tokenów. W ten sposób, zamiast zapisywać cały kod źródłowy moglibyśmy zapamiętywać jedynie kilka 
 	krótkich sekwencji. 
 \end{itemize}
+\end{description}
 
-\subsection {Pytania badawcze}
-Czy rekurencyjne sieci neuronowe nadają się do wykonywania predykcji w kodzie?
-\subsubsection {Podpytania}
-\label{questions}
-\begin{itemize}
-	\item Jaki jest wpływ długości sekwencji na predykcje? 
-	\item Czy wielkość słownika ma wpływ na predykcje? 
-	\item Czy liczba warstw rekurencyjnej sieci neuronowej ma wpływ na działanie modelu? 
-	\item Czy liczba neuronów w warstwie wpływa na skuteczność modelu? 
-	\item Czy układ warstw zastosowanych w modelu wpływa na skuteczność modelu?  
-	\item Czy rodzaj warstwy rekurencyjnej ma wpływ na skuteczność modelu?
-	\item Czy sieci neuronowe działają wystarczająco szybko aby zapewnić komfortową pracę programiście? 
-\end{itemize} 
+
+
+\subsection {Cel}
+Celem tej pracy jest stworzenie modelu uczenia maszynowego przewidującego kolejny token podczas pisania kodu programu w języku python, 
+oraz implementacja go jako wtyczki do zintegrowanego środowiska programistycznego SublimeText3. 

@@ -35,7 +35,7 @@
 }
 \author{Rafał Lewanczyk}
 \album{293140}
-\promotor{Paweł Zawistowski}
+\promotor{dr inż. Paweł Zawistowski}
 \date{\the\year}
 \maketitle
 
@@ -43,15 +43,46 @@
 % Streszczenie po polsku
 %--------------------------------------
 \cleardoublepage % Zaczynamy od nieparzystej strony
-\streszczenie TODO\\\lipsum[1-3]
-\slowakluczowe XXX, XXX, XXX
+\streszczenie \\
+Uzupełnianie kodu jest funkcją odpowiedzialną za przewidywanie tego co chce, lub może napisać programista. Poprawnie 
+działająca może w znaczący sposób wspomóc oraz uefektywnić jego pracę. Istnieje wiele podejść do tego 
+problemu np. przy pomocy metod słownikowych lub parsowania na bieżąco pisanego kodu. 
+
+W tej pracy omawiam podejście polegające na zastosowaniu metod uczenia
+maszynowego. Generuje ono posortowaną według prawdopodobieństwa wystąpienia listę sugestii, które mogą zostać wykorzystane 
+przez programistę w trakcie pracy nad programem. 
+
+Opisuję badane przeze mnie architektury, oraz porównuję je pod względem skuteczności. Wymieniam 
+również napotkane wyzwania. 
+
+Końcowy model został wytrenowany na 9000 plikach w języku Python, pochodzących z publicznie dostępnych 
+repozytoriów na serwisie GitHub, oraz oceniony na 4500 plikach. Jego skuteczność wyniosła 
+\begin{math}68\%\end{math} dla 5 najlepszych predykcji, a średni czas odpowiedzi 18 ms. 
+
+Model ten został zaimplementowany jako wtyczka do środowiska SublimeText 3. 
+\slowakluczowe Uczenie maszynowe, autouzupełnianie, kod źródłowy
 
 %--------------------------------------
 % Streszczenie po angielsku
 %--------------------------------------
 \newpage
-\abstract TODO\\\kant[1-3]
-\keywords XXX, XXX, XXX
+\abstract
+Code autocompletion is a feature that offers suggestions for what a software developer may want 
+to write. Correct suggestions improve efficiency of programmers job. There are a lot of forms 
+of code autocompletion, for example using dictionary methods or parsing code online. 
+
+In this paper, I propose approach for code autocompletion using machine learning. It generates 
+ranked by its probabilities of occurrences list of suggestions, which can be used by software developer at edit time. 
+
+I describe explored architectures and compare them to each other in order to select the best one. I 
+also discuss challenges regarding this approach. 
+
+The final model was trained using 9000 Python source files from publicly available repositories from service
+GitHub and evaluated on 4500 files. The evaluation results in \begin{math}68\%\end{math}
+accuracy for top 5 suggestions, and mean time of response resulted in 18 ms. 
+
+The system is available as a plugin for integrated development environment SublimeText 3. 
+\keywords Machine Learning, Autocomplete, Source Code 
 
 %--------------------------------------
 % Oświadczenie o autorstwie
@@ -107,7 +138,6 @@
 \acronymlist
 \acronym{EiTI}{Wydział Elektroniki i Technik Informacyjnych}
 \acronym{PW}{Politechnika Warszawska}
-\acronym{WEIRD}{ang. \emph{Western, Educated, Industrialized, Rich and Democratic}}
 
 \listoffigurestoc     % Spis rysunków.
 \vspace{1cm}          % vertical space
@@ -116,13 +146,13 @@
 \listofappendicestoc  % Spis załączników
 
 % Załączniki
-\newpage
-\appendix{Nazwa załącznika 1}
-\lipsum[1-8]
+% \newpage
+% \appendix{Nazwa załącznika 1}
+% \lipsum[1-8]
 
-\newpage
-\appendix{Nazwa załącznika 2}
-\lipsum[1-4]
+% \newpage
+% \appendix{Nazwa załącznika 2}
+% \lipsum[1-4]
 
 % Używając powyższych spisów jako szablonu,
 % możesz tu dodać swój własny wykaz bądź listę,

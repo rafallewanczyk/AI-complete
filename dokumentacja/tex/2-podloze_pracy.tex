@@ -1,31 +1,40 @@
 \newpage % Rozdziały zaczynamy od nowej strony.
-\section{Podłoże pracy}
+\section{Przegląd literatury}
 W ciągu ostatnich kilku lat przetwarzanie języka naturalnego bardzo się rozwinęło. Wraz z kolejnymi 
 badaniami udało się uzyskać coraz lepsze rezultaty. Jednak dział badający zachowanie tych modeli 
-na językach programowania jest nowy, co możemy zaobserwować po zbiorze prac \cite{ml4code}
+na językach programowania jest nowy, co możemy zaobserwować po analizie zbioru prac \cite{ml4code}
 z nim związanych. Jest w nim dużo miejsca na nowe podejścia oraz badania. W tym rozdziale omówię 
-opiszę prace istotne lub podobne do mojej.  
+prace istotne lub podobne do mojej.  
 
+\begin{description}
+\item[Zadanie modelowania sekwencji]
+\hfill\\
+Problem przewidywania kodu źródłowego jest przypadkiem zadania modelowania sekwencji. Polega ono na określeniu 
+prawdopodobieństwa zdania w języku. Poza przypisaniem prawdopodobieństwa każdej z sekwencji słów model językowy 
+również określa, które ze słów występujących w słowniku ma największe szanse na pojawienie się jako następny element
+danej sekwencji. 
 
-\subsection{Sieci neuronowe w przewidywaniu języków programowania}
+Istnieje wiele metryk służących do oceniania działania tego typu modeli np. perpleksja. Jednak jako, że modele w tej
+pracy tworzone są z myślą o wykonywaniu określonego zadania, będą one oceniane oraz porównywane pod kątem radzenia 
+sobie w danym zadaniu. Kryteria te są dokładnie opisane w rozdziale \ref{evaluation}. 
+\end{description}
+
+\subsection{Metody uczenia maszynowego w przewidywaniu języków programowania}
 Subhasis Das, Chinmayee Shah \cite{contextual_code_completion} porównują ze sobą modele
 \begin{itemize}
-    \item model z wagami o stałej długości okna (fixed window weight model)
-    \item model macierzy wektorów (matrix vector model)
-    \item sieć neuronowa z wyprzedzeniem (feed-forward neural network)
-    \item model z wyprzedzeniem oraz miękka uwagą (feed-forward model with soft attention)
-    \item model rekurencyjny z warstwą GRU
+    \item model z wagami o stałej długości okna (fixed window weight model), 
+    \item model macierzy wektorów (matrix vector model),
+    \item sieć jednokierunkowa (feed-forward neural network), 
+    \item sieć jednokierunkowa ze skupieniem uwagi (feed-forward model with soft attention), 
+    \item model rekurencyjny z warstwą GRU. 
 \end{itemize}
 Kod wejściowy jest poddany tokenizacji przy pomocy wyrażeń regularnych. Oceniane odbywa się poprzez dokładne
 dopasowanie pierwszego przewidzianego tokenu oraz na podstawie 3 najlepszych sugestii. Do treningu oraz testów 
 używane są kody bibliotek Django, Twisted oraz jądra systemu Linux. Połowa plików źródłowych jednego z 
 projektów używana jest jako zbiór treningowy natomiast druga połowa jako zbiór walidacyjny. Wszystkie modele
-osiągają dokładność przewidzeń równą około 80\% dla 3 najlepszych sugestii, najlepiej radzi sobie model miękka uwagą
-z dokładnością 83.6\%. Problem słów poza słownikiem rozwiązany jest przy pomocy słownika przypisującego 
-token o nieznanej wartości do słowa które wpisał użytkownik. Moja praca różni się tym, że skupiam się 
-wyłącznie na sieciach rekurencyjnych, jako że w powyższej warstwa LSTM nie została uwzględniona. Próbuję 
-również uogólnić przewidywany kod poprzez trening na znacznie bardziej zróżnicowanych bibliotekach aby sprawić
-by wtyczka była użyteczna w bardziej ogólnych zastosowaniach. \\
+osiągają dokładność przewidzeń równą około 60\% dla 3 najlepszych sugestii, najlepiej radzi sobie model miękka uwagą
+z dokładnością 66.5\%. Problem słów poza słownikiem rozwiązany jest przy pomocy słownika przypisującego 
+token o nieznanej wartości do słowa które wpisał użytkownik. \\
 
 Hellendoorn i Devanbu przeprowadzili eksperyment polegający na wykonaniu 15000 predykcji dla 
 środowiska Visual Studio. Jako zbioru danych używają 14000 plików źródłowych w języku Java. 
@@ -34,26 +43,24 @@ Prezentują również dynamicznie aktualizowane modele n-gram działające w zag
 w ten sposób problem skończonego słownika oraz znacznie usprawniając sugestie. Rezultaty tej pracy 
 pokazują, że pomimo znacznie lepszych wyników sieci rekurencyjnych w zadaniu modelowania języka 
 naturalnego, modele n-gram w niektórych przypadkach radzą sobie lepiej z przewidywaniem kodu. Jednym
-z przytoczonych przykładów są metody wbudowane w język, dla których głębokie sieci działają lepiej, 
+z przytoczonych przykładów są wbudowane funkcje języka np. \begin{math}len()\end{math} w języku python, dla których głębokie sieci działają lepiej, 
 jednak przegrywają przy często występujących, zróżnicowanych,  mało popularnych bibliotekach zewnętrznych, 
 w których model n-gram naturalnie radzi sobie lepiej, jednak przegrywa pod innymi względami. Swoje 
-eksperymenty przeprowadzają dla stałych wartości hiperparametrów, w swojej pracy chcę również
-zająć się strojeniem wybranych modeli. \\
+eksperymenty przeprowadzają dla stałych wartości hiperparametrów.\\
 
 Pythia \cite{pythia} stworzona przez zespół programistów Microsoftu, w którego skład wchodzą Alexey Svyatkovskiy, Shengyu Fu, Ying Zhao, Neel Sundaresan
-jest rozszerzeniem do wtyczki IntelliSense w środowisku Visual Studio Code. W swojej pracy testują zastosowanie najwydajniejszych 
-na ten moment modeli sieci rekurencyjnych. Jako zbiór treningowy użyte jest 2700 projektów z serwisu github \cite{github}
-które wcześniej zostały poddane rozbiorowi na drzewa składniowe. Model osiąga najlepszą dotychczasową skuteczność wynoszącą
-92\% dla najlepszych 5 sugestii oraz bardzo dobry czas odpowiedzi w okolicach 100 ms. Eksperymentu tego nie będę w stanie 
+jest rozszerzeniem do wtyczki IntelliSense w środowisku Visual Studio Code. W swojej pracy używają wariacji modeli sieci rekurencyjnych.
+Jako zbiór treningowy użyte jest 2700 projektów z serwisu github \cite{github}
+które wcześniej zostały poddane rozbiorowi na drzewa składniowe. Model osiąga skuteczność wynoszącą
+92\% dla najlepszych 5 sugestii oraz czas odpowiedzi w okolicach 100 ms. Eksperymentu tego nie będę w stanie 
 dokładnie odtworzyć ze względu na inne przygotowanie danych wejściowych oraz przez inny zbiór danych (zbiór wykorzystany przez
-Pythie nie został udostępniony). Mimo to planuję zaimplementować oraz ocenić wyróżnioną architekturę w moim eksperymencie. 
+Pythie nie został udostępniony). 
 
-\subsection {Modele statystyczne w przewidywaniu języków programowania}
-Myroslava Romaniuk \cite{pharo} pokazuje, że modele statystyczne, w tym przypadku n-gram, dokładnie 
-unigram oraz bigram radzą sobie 
-z automatycznym uzupełnianiem kodu. W swojej pracy usprawnia działanie wtyczki do środowiska programistycznego 
-Pharo. Zaproponowany model trenuje na 50 projektach w tym języku, osiągając dokładność około 40\%. 
-W swojej pracy łącze modele rekurencyjne właśnie z kombinacją modeli unigram oraz bigram.
+% \subsection {Modele statystyczne w uzupełnianiu kodu}
+% Myroslava Romaniuk \cite{pharo} pokazuje, że modele statystyczne, w tym przypadku n-gram, dokładnie 
+% unigram oraz bigram radzą sobie 
+% z automatycznym uzupełnianiem kodu. W swojej pracy usprawnia działanie wtyczki do środowiska programistycznego 
+% Pharo. Zaproponowany model trenuje na 50 projektach w tym języku, osiągając dokładność około 40\%. 
 
 \subsection {Rozwiązania komercyjne}
 W dużej mierze do powstania tej pracy przyczyniły się istniejące już rozwiązania komercyjne. Niestety 
@@ -71,28 +78,63 @@ Open AI \cite{openai} realizuje generowanie kodu na podstawie opisu jego działa
 języka naturalnego przez maszynę, z zadaniem klasyfikacji. Słownik zamiast składać sie z pojedyńczych tokenów skłąda sie z całych funkcji, 
 a na wejściu modelu otrzymujemy sekwencje słów zamiast poprzedzający kod. 
 
-\subsection {Rodzaje sieci}
-W swojej pracy skupiam się na rekurencyjnych sieciach neuronowych (RNN). Sieci te charakteryzują się wykorzystywaniem informacji 
-sekwencyjnych, w odróżnieniu do tradycyjnej sieci, w której zakładamy, że wszystkie wejścia i wyjścia są niezależne od siebie. Wykorzystuję
-trzy rodzaje warstw sieci w różnych konfiguracjach: 
-\begin{itemize}
-    \item LSTM (Long Short-Term Memory)
-    \item GRU (Gated Recurrent Unit)
-    \item CNN - splotowa sieć neuronowa (Convolutional Neural Network)
-\end{itemize}
+\subsection{Różnice w rozwiązaniach}
+Moja praca różni się od powyższych tym, że skupiam się na dokładniejszym zbadaniu sieci rekurencyjnych, jako że w powyższych pracach nie zostały uwzględnione różne wariacje ich układu.
+ Próbuję również uogólnić przewidywany kod poprzez trening na znacznie bardziej zróżnicowanych bibliotekach, oddających częstotliwość ich używania,
+ aby sprawić by wtyczka była użyteczna w bardziej ogólnych zastosowaniach. 
+\subsection {Sieci neuronowe}
+Sieć neuronowa to model matematyczny, realizujący obliczenia poprzez rzędy elementów przetwarzających zwanych warstwami. W skład każdej warstwy wchodzi 
+określona liczba neuronów. Odpowiedzialnością neuronu jest wykonanie pewnej podstawowej operacji na swoim wejściu oraz przekazanie dalej wyniku. 
+
+W swojej pracy skupiam się na rekurencyjnych sieciach neuronowych (RNN). Sieci te charakteryzują się możliwością zapamiętywania stanu, co jest przydatne 
+w przetwarzaniu sekwencji, w odróżnieniu do tradycyjnej sieci, w której zakładamy, że kolejne przetwarzane przez model elementy są niepowiązane. Wykorzystuję
+dwa rodzaje warstw sieci w różnych konfiguracjach. Zamysł stojący za sieciami rekurencyjnymi został przedstawiony na rysunku \ref{fig:rnn}
 \begin{figure}[!h]
 	% Znacznik \caption oprócz podpisu służy również do wygenerowania numeru obrazka;
-	\caption{Działanie sieci neuronowej}
+	\caption{Działanie rekurencyjnej sieci neuronowej}
 	% dlatego zawsze pamiętaj używać najpierw \caption, a potem \label
     \label{fig:rnn}
     % Zamiast width można też użyć height, etc. 
     \centering \includegraphics[width=28mm, height=54mm]{rnn.png}
 \end{figure}
-Architektura LSTM jest w tym momencie najpopularniejszą w zadaniach generowania sekwencji, oraz predykcji szeregów czasowych. Komórka LSTM 
-wyposażona jest w trzy bramki: 'wejścia',  'zapomnienia', 'wyjścia'. Bramki te kontrolują które informacje zostaną zapamiętane, zapomniane
-oraz przewidziane na podstawie wytrenowanych parametrów. Komórka GRU posiada dwie bramki: 'wejścia' oraz 'zapomnij'. Podobnie do sieci LSTM 
-decydują one o tym które informacje mają zostać zachowane, a które zapomniane. CNN to sieć z wyprzedzeniem stosująca operacje splotowe na wejściowych 
-wektorach. 
+\begin{description}
+    \item[LSTM (Long Short-Term Memory) \cite{lstm}] 
+    \hfill \\ 
+    \begin{figure}[!h]
+    \captionsetup{justification=centering}
+	% Znacznik \caption oprócz podpisu służy również do wygenerowania numeru obrazka;
+	\caption{Komórka warstwy LSTM\\źródło: https://morioh.com/p/34ad430cb59b}
+	% dlatego zawsze pamiętaj używać najpierw \caption, a potem \label
+    \label{fig:lstm}
+    % Zamiast width można też użyć height, etc. 
+    \centering \includegraphics[width=70mm, height=54mm]{lstm.png}
+\end{figure}   
+    Architektura LSTM jest w tym momencie najpopularniejszą w zadaniach generowania sekwencji. Komórka LSTM 
+    wyposażona jest w trzy bramki: 'wejścia',  'zapomnienia', 'wyjścia'. Bramki te kontrolują które informacje zostaną zapamiętane, zapomniane
+    oraz przewidziane na podstawie wytrenowanych parametrów. Komórka LSTM została przedstawiona na rysunku \ref{fig:lstm}. 
+    \\
+    \item[GRU (Gated Recurrent Unit) \cite{gru}] 
+    \hfill \\ 
+    \begin{figure}[!h]
+        \captionsetup{justification=centering} 
+        % Znacznik \caption oprócz podpisu służy również do wygenerowania numeru obrazka;
+        \caption{Komórka warstwy GRU\\źródło: https://morioh.com/p/34ad430cb59b}
+        % dlatego zawsze pamiętaj używać najpierw \caption, a potem \label
+        \label{fig:gru}
+        % Zamiast width można też użyć height, etc. 
+        \centering \includegraphics[width=80mm, height=54mm]{gru.png}
+    \end{figure}  
+        Komórka GRU posiada dwie bramki: 'wejścia' oraz 'zapomnij'. Podobnie do sieci LSTM 
+        decydują one o tym które informacje mają zostać zachowane, a które zapomniane. Komórka GRU została przedstawiona 
+        na rysunku \ref{fig:gru}.
+        \\
+  \end{description}
+
+
+\subsection {Warstwa CNN}
+W części badanych przeze mnie modeli używam również warstwy konwolucyjnej CNN (Convolutional neural network). Składa się ona 
+z szeregu warstw splotowych, które splatają się z mnożeniem lub iloczynem skalarnym. Jednym z zastosowań sieci CNN jest 
+odnajdywanie wzorców, przez co sprawdza się ona w zadaniu przetwarzania języka naturalnego. 
 
 \subsection{Modele statystyczne N-gram}
 Model N-gram jest modelem językowym mającym bardzo szerokie zastosowanie we wszystkich dziedzinach związanych z mową oraz pismem. 
@@ -101,7 +143,11 @@ N-gramy opierają się na statystykach i służą do przewidywania kolejnego ele
 Modele N-gram szacują prawdopodobieństwo kolejnego słowa na podstawie wcześniej występujących słów za pomocą
 prawdopodobieństwa warunkowego. Zatem model przewiduje \begin{math}x_i\end{math} na podstawie danego ciągu 
 \begin{math}x_{i-(n-1)},...,x_{i-1}\end{math}. Zapisując wyrażenie przy pomocy prawdopodobieństwa otrzymujemy \\
-\centerline{\begin{math}P(x_i|x_{i-(n-1)},...,x_{i-1})\end{math}}
+\centerline{\begin{math}P(x_i|x_{i-(n-1)},...,x_{i-1}),\end{math}} co z definicji prawdopodobieństwa warunkowego możemy 
+przekształcić do wyrażenia\\\\ \centerline{\begin{math}\frac{P(x_i, x_{i-(n-1)},..., x_{i-1})}{P(x_{i-(n-1)},..., x_{i-1})}.\end{math}}\\\\
+Poszczególne prawdopodobieństwa znajdujemy poprzez zbieranie statystyk ich wystąpienia w dużym korpusie tekstu. Zatem 
+powyższy wzór możemy przybliżyć w następujący sposób\\\\
+\centerline{\begin{math}\frac{liczba(x_i, x_{i-(n-1)},..., x_{i-1})}{liczba(x_{i-(n-1)},..., x_{i-1})}.\end{math}}
 
 \subsection {Wykorzystany zbiór danych}
 \label{sec:dataset-background}
@@ -119,4 +165,10 @@ Przy założeniu, że czas ten będzie rosnąć proporcjonalnie do rozmiaru dany
 około 15 godzin, a całkowity trening, za który przyjąłem 25 epok, około dwóch tygodni. Drugim jest to, że pracę naukowe, z 
 którymi chcę porównać swoje wyniki również używają zbiorów o podobnych rozmiarach. 
 
+Do realizacji projektu zostały wykorzystane następujące narzędzia:
+\begin{itemize}
+    \item Python 3.7.0,
+    \item biblioteka TensorFlow 2.4.0, 
+    \item edytor SublimeText 3
+\end{itemize}
 
