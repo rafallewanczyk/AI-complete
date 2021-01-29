@@ -13,7 +13,7 @@ from src.dataset import Dataset
 
 class Model:
 
-    def __init__(self, vocab_size, embedding_dim, rnn_units, batch_size, win_size, checkpoint_name):
+    def __init__(self, vocab_size, embedding_dim, rnn_units, batch_size, win_size, checkpoint_name, loss_name):
         self.vocab_size = vocab_size
         self.embedding_dim = embedding_dim
         self.rnn_units = rnn_units
@@ -21,15 +21,20 @@ class Model:
         self.win_size = win_size
         self.optimizer = tf.keras.optimizers.Adam()
         self.checkpoint_name = checkpoint_name
+        self.loss_name = loss_name
 
     def build_model(self):
         self.model = Sequential()
         self.model.add(Embedding(self.vocab_size, self.embedding_dim, batch_input_shape=[self.batch_size, None]))
         # self.model.add(Convolution1D(self.embedding_dim, kernel_size=1, activation='relu'))
+        # self.model.add(
+        #     LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+        # self.model.add(
+        #     LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         self.model.add(
             LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
-        # self.model.add(
-        #     GRU(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
+        self.model.add(
+            LSTM(self.rnn_units, return_sequences=True, stateful=True, recurrent_initializer='glorot_uniform'))
         self.model.add(Dense(self.vocab_size))
 
     def compile(self, mode='training'):
@@ -55,7 +60,7 @@ class Model:
             for (batch_n, (x, y)) in enumerate(self.dataset.next_batch(tokenized_files, self.batch_size)):
                 loss = self.train_step(x, y)
                 if batch_n % 500 == 0:
-                    with open('.\\checkpoints\\losses.txt', 'a') as f:
+                    with open(self.loss_name, 'a') as f:
                         f.write(loss.numpy().__str__())
                         f.write('\n')
                     print(f'Epoch {epoch} Batch {batch_n} Loss {loss} in {"%2f" % (time.time() - batch_start)}')
@@ -80,7 +85,7 @@ class Model:
         self.compile(mode='predict')
         print(self.model.summary())
 
-    def get_prediction(self, seed_string, number=1):
+    def get_prediction(self, seed_string, k=5, number=1):
         input_tokens = self.dataset.token2id(utils.tokenize_string(seed_string))
         if len(input_tokens) == 0:
             return ['<UNK>']
@@ -95,7 +100,7 @@ class Model:
             predictions = self.predict(input_tokens)
             predictions = tf.squeeze(predictions, 0)
             predicted_id = tf.math.argmax(predictions[-1]).numpy()
-            predicted_ids = tf.math.top_k(predictions[-1], k=5)
+            predicted_ids = tf.math.top_k(predictions[-1], k=k)
 
             input_tokens = tf.expand_dims([predicted_id], 0)
 
