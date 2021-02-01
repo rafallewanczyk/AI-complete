@@ -23,6 +23,6 @@
 - przy pomocy notatnika ```prediction_driver.ipynb``` wczytać wytrenowany model oraz rozpocząć walidację. Istnieje możliwość nadania argumentowi ```html``` wartość ```true``` w celu generowania plików wyjściowych z zaznaczonymi poprawnymi oraz niepoprawnymi sugestiamii. 
 
 ### Instalacja oraz serwowanie predykcji 
-Umieścić zawartość folderu w w folderze ```plugins`` w lokalizacji SublimeText 3. 
+Umieścić zawartość folderu w w folderze ```plugins``` w lokalizacji SublimeText 3. 
 Uruchomić serwer znajdujący się w folderze ```server```. 
 Serwer domyślnie działa pod adresem ```localhost:8000```
